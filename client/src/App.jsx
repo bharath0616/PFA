@@ -16,6 +16,10 @@ import SipHigh from './pages/sip/SipHigh';
 import TaxLow from './pages/tax/TaxLow';
 import TaxMedium from './pages/tax/TaxMedium';
 import TaxHigh from './pages/tax/TaxHigh';
+import Recommend from './pages/Recommend';
+import RecLR from './pages/recommendations/RecLR.jsx';
+import RecHR from './pages/recommendations/RecHR';
+import RecMR from './pages/recommendations/RecMR';
 
 
 
@@ -28,6 +32,10 @@ import TaxHigh from './pages/tax/TaxHigh';
         <Route path='/data' element={<DataEntry/>} />
         <Route path='/blogs' element={<Blog />} />
         <Route path='/tools' element={<Tools />} />
+        <Route path='/recommend' element={<Recommend />} />
+        <Route path='/recommendations-lr' element={<RecLR />} />
+        <Route path='/recommendations-hr' element={<RecHR />} />
+        <Route path='/recommendations-mr' element={<RecMR />} />
         <Route path='/salarBreakdown' element={<SalaryBreakdown />} />
         <Route path='/sipCalculator' element={<SipCalculator />} />
         <Route path='/taxCalculator' element={<TaxCalculator />} />

@@ -29,7 +29,7 @@ export default function TaxCalculator() {
              </div>
           </div>
           <div className='flex justify-start'>
-          <Link to='/' className=' no-underline flex items-center justify-center
+          <Link to='/taxlow' className=' no-underline flex items-center justify-center
            bg-white py-4 px-8 rounded-full mt-4 text-[#0328EE] font-heading 
            font-bold cursor-pointer shadow-lg transition-all hover:bg-opacity-90'>
                    GET STARTED
@@ -57,7 +57,7 @@ export default function TaxCalculator() {
              </div>
           </div>
           <div className='flex justify-start'>
-          <Link to='/' className=' no-underline flex items-center justify-center
+          <Link to='/taxmedium' className=' no-underline flex items-center justify-center
            bg-white py-4 px-8 rounded-full mt-4 text-[#0328EE] font-heading 
            font-bold cursor-pointer shadow-lg transition-all hover:bg-opacity-90'>
                    GET STARTED
@@ -85,7 +85,7 @@ export default function TaxCalculator() {
              </div>
           </div>
           <div className='flex justify-start'>
-          <Link to='/' className=' no-underline flex items-center justify-center
+          <Link to='/taxhigh' className=' no-underline flex items-center justify-center
            bg-white py-4 px-8 rounded-full mt-4 text-[#0328EE] font-heading 
            font-bold cursor-pointer shadow-lg transition-all hover:bg-opacity-90'>
                    GET STARTED

@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { dataStart, dataSuccess, dataFailure, resetData } from '../redux/user/userSlice';
 import { PieChart } from 'react-minimal-pie-chart';
+import { useNavigate } from 'react-router-dom';
 export default function DataEntry() {
   const [formData, setFormData] = useState({});
   const dispatch = useDispatch();
- 
+  const [submitted, setSubmitted] = useState(false);
   const { loading, error, data: results } = useSelector((state) => state.user);
-  
+  const navigate = useNavigate(); 
+
   useEffect(() => {
     dispatch(resetData());
   }, [dispatch]);
@@ -16,7 +18,6 @@ export default function DataEntry() {
     ? results.shares + results.mutualFunds + results.bonds + results.savings
     : 0;
 
-  // Get percentage for the pie chart labels
   const getPercentage = (value) => (value / totalInvested) * 100;
   
   const handleChange = (e) => {
@@ -35,6 +36,7 @@ export default function DataEntry() {
       const data = await response.json();
       if (response.ok) {
         dispatch(dataSuccess(data));
+        setSubmitted(true);
       } else {
         dispatch(dataFailure(data.message));
       }
@@ -42,6 +44,24 @@ export default function DataEntry() {
       dispatch(dataFailure(error.toString()));
     }
   };
+  const handleNavigate = () => {
+    switch (formData.riskTolerance) {
+      case 'Very high':
+      case 'High':
+        navigate('/recommendations-hr');
+        break;
+      case 'Medium':
+        navigate('/recommendations-mr');
+        break;
+      case 'Low':
+      case 'Very low':
+        navigate('/recommendations-lr');
+        break;
+      default:
+        break; 
+    }
+  };
+
   const radius = 50; 
   const labelPosition = 60; 
   const pieChartData = results ? [
@@ -106,6 +126,7 @@ export default function DataEntry() {
       </form>
       {error && <p className='text-red-700 mt-6'>{error}</p>}
       {results && (
+        <div  className='flex flex-col justify-center'>
         <div className='flex justify-around gap-4 mt-10'>
         <div className='mt-6 text-white'>
           <h2 className='text-xl font-heading font-bold'>As per your requirements, the following <br/>investment distribution would be optimal-
@@ -127,6 +148,16 @@ export default function DataEntry() {
   radius={radius}
   labelPosition={labelPosition}
 />
+        </div>
+        
+        </div>
+        <div className='flex items-center justify-center '>
+        <button 
+          className='mt-4 bg-blue-500  hover:bg-blue-700 border-transparent text-white font- font-heading py-2 px-4 rounded-full'
+          onClick={handleNavigate}
+        >
+          Your Recommended Stocks
+        </button>
         </div>
         </div>
       )}

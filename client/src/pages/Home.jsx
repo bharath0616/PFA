@@ -15,10 +15,11 @@ import s44 from '../assets/s4-4.png'
 import s45 from '../assets/s4-5.png'
 
 import video from '../assets/video.png'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram, faFacebookF, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
+
 
 import investment from '../assets/investment.png'
+import debt from '../assets/debt.png'
+import credit from '../assets/credit.png'
 import face from '../assets/face.png'
 import { Link } from 'react-router-dom'
 export default function Home() {
@@ -72,8 +73,9 @@ export default function Home() {
         <div className="flex flex-col items-start z-10 justify-around rounded-3xl p-8 z-1 bg-[#010D50]  shadow-md">
         
           <img src={g2} alt="" className="w-12 "/>
-          <h className="mt-2 bg-[#010D50] text-white font-heading font-bold">FINANCIAL RECOMMENDER</h>
-          <p className="mt-1 bg-[#010D50] text-white font-heading font-light text-sm sm:lg">Input your amount to invest and risk tolerance, and receive a tailored investment plan based on the current market trends</p>
+          <h className="mt-2 bg-[#010D50] text-white font-heading font-bold">CHATBOT</h>
+          <p className="mt-1 bg-[#010D50] text-white font-heading font-light text-sm
+           sm:lg">Converse with our in-house chatbot to clarify on any questions you may have, be it from a previous conversation or a new query</p>
         </div>
       </div>
       <img src={glow} className="absolute bg-transparent h-[40rem] w-[40rem] z-0 bottom-[-70%] opacity-45 right-96 mr-30" alt="Glow"/>
@@ -84,19 +86,20 @@ export default function Home() {
         <div className="flex flex-col  items-start justify-around rounded-3xl p-8 z-10 bg-[#010D50]  shadow-md">
        
           <img src={g3} alt="" className="w-12 "/>
-          <h className="mt-2 bg-[#010D50] text-white font-heading font-bold">FINANCIAL RECOMMENDER</h>
-          <p className="mt-1 bg-[#010D50] text-white font-heading font-light text-sm sm:lg">Input your amount to invest and risk tolerance, and receive a tailored investment plan based on the current market trends</p>
+          <h className="mt-2 bg-[#010D50] text-white font-heading font-bold">EXPENSE TRACKER</h>
+          <p className="mt-1 bg-[#010D50] text-white font-heading font-light text-sm sm:lg">Our tool categorizes your spending into different baskets, offering visual insights into your expenditure pattern</p>
         </div>
         
         <div className="flex flex-col items-start justify-around bg-[#010D50] z-10 rounded-3xl p-8  shadow-md">
           <img src={g4} alt="" className="w-12 "/>
-          <h className="mt-2 bg-[#010D50] text-white font-heading font-bold">FINANCIAL RECOMMENDER</h>
-          <p className="mt-1 bg-[#010D50] text-white font-heading font-light text-sm sm:lg">Input your amount to invest and risk tolerance, and receive a tailored investment plan based on the current market trends</p>
+          <h className="mt-2 bg-[#010D50] text-white font-heading font-bold">SALARY CALCULATOR</h>
+          <p className="mt-1 bg-[#010D50] text-white font-heading font-light text-sm sm:lg">Calculate your net take-home salary after considering taxes and inflation
+</p>
         </div>
         <div className="flex flex-col items-start justify-around bg-[#010D50] z-10 rounded-3xl p-8  shadow-md">
           <img src={g5} alt="" className="w-12 "/>
-          <h className="mt-2 bg-[#010D50] text-white font-heading font-bold">FINANCIAL RECOMMENDER</h>
-          <p className="mt-1 bg-[#010D50] text-white font-heading font-light text-sm sm:lg">Input your amount to invest and risk tolerance, and receive a tailored investment plan based on the current market trends</p>
+          <h className="mt-2 bg-[#010D50] text-white font-heading font-bold">NEWSLETTER</h>
+          <p className="mt-1 bg-[#010D50] text-white font-heading font-light text-sm sm:lg">Stay updated with our biweekly newsletter featuring the top 10 financial reads curated by our experts</p>
         </div>
       </div>
     </div>
@@ -200,14 +203,14 @@ export default function Home() {
         {/* Blog 1 */}
         <div className='flex flex-col rounded-3xl  overflow-hidden'>
           <div className='relative'>
-            <img src={investment} alt="Investment" className='  w-full'/>
+            <img src={credit} alt="Investment" className='  w-full'/>
             <p className='absolute z-10  bottom-[-10%] ml-6 text-white font-heading font-semibold text-sm bg-[#0328EE] p-2 rounded-full'>
-              INVESTMENT
+              DEBT CARE
             </p>
           </div>
           <div className='flex flex-col items-start top-0 mt-0 bg-[#010D50] p-4 gap-2'>
-            <h2 className='text-white font-heading text-xl bg-[#010D50] font-bold'>A Beginner's Guide to Personal Investment</h2>
-            <p className='text-white bg-[#010D50] font-heading text-sm'>Designed to help you navigate the complex world of stocks, bonds, and mutual funds</p>
+            <h2 className='text-white font-heading text-xl bg-[#010D50] font-bold'>Credit Score 101: Understanding and Improving Your Credit Rating</h2>
+            <p className='text-white bg-[#010D50] font-heading text-sm'>Demystify the concept of credit scores with this comprehensive guide.</p>
             <div className='flex items-center bg-[#010D50] gap-3 mt-5'>
               <img src={face} alt="Dave Ramsay" className='w-12 h-12 rounded-full'/>
               <div className='bg-[#010D50]'>
@@ -221,14 +224,15 @@ export default function Home() {
         {/* Blog 1 */}
         <div className='flex flex-col rounded-3xl  overflow-hidden'>
           <div className='relative'>
-            <img src={investment} alt="Investment" className='  w-full'/>
+            <img src={debt} alt="Investment" className='  w-full'/>
             <p className='absolute z-10  bottom-[-10%] ml-6 text-white font-heading font-semibold text-sm bg-[#0328EE] p-2 rounded-full'>
               INVESTMENT
             </p>
           </div>
           <div className='flex flex-col items-start top-0 mt-0 bg-[#010D50] p-4 gap-2'>
-            <h2 className='text-white font-heading text-xl bg-[#010D50] font-bold'>A Beginner's Guide to Personal Investment</h2>
-            <p className='text-white bg-[#010D50] font-heading text-sm'>Designed to help you navigate the complex world of stocks, bonds, and mutual funds</p>
+            <h2 className='text-white font-heading text-xl bg-[#010D50] font-bold'>Debt-Free Living: Strategies to Eliminate Debt Fast</h2>
+            <p className='text-white bg-[#010D50] font-heading text-sm'>
+Effective techniques to tackle debt head-on, from high-interest loans to credit card debt, and take control of your financial health.</p>
             <div className='flex items-center bg-[#010D50] gap-3 mt-5'>
               <img src={face} alt="Dave Ramsay" className='w-12 h-12 rounded-full'/>
               <div className='bg-[#010D50]'>
