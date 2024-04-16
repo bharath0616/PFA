@@ -5,8 +5,12 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+body,html{
 
 
-    background-color: rgb(7, 7, 54);
+    background-color:rgb(6, 6, 40); 
+    
+    margin: 0;
+    padding: 0;
+    height: 100vh;
 }

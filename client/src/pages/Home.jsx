@@ -15,6 +15,8 @@ import s44 from '../assets/s4-4.png'
 import s45 from '../assets/s4-5.png'
 
 import video from '../assets/video.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInstagram, faFacebookF, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 
 import investment from '../assets/investment.png'
 import face from '../assets/face.png'
@@ -33,8 +35,9 @@ export default function Home() {
       interactive chatbot support, and comprehensive content management for 
       enhanced financial literacy.
     </p>
-    <Link to='/signin' className='no-underline w-14 mt-16 bg-[#0328EE] px-3 py-3 rounded-full'>
-      <li className='text-white list-none bg-[#0328EE] text-sm sm:text-md font-heading font-bold cursor-pointer'>LOG IN</li>
+    <Link to='/data' className='no-underline   bg-[#0328EE] p-3 max-w-20 flex justify-centeritems-center rounded-full'>
+      <li className='text-white list-none bg-[#0328EE] text-sm sm:text-md font-heading font-bold cursor-pointer'>
+      Enter Data</li>
     </Link>
   </div>
 
@@ -162,52 +165,90 @@ export default function Home() {
 
           {/* Fifth section -------->*/}
 
-          <div className='mt-40 '>
-            <div className='flex justify-around'>
-            <h className='text-white font-heading font-bold text-4xl mb-6'>
+          <div className='mt-40 flex flex-col ml-20 mr-20 '>
+            <div className='flex justify-between mb-10 '>
+            <h className='text-white font-heading  font-bold text-4xl  mb-6'>
             Browse our latest blogs
             </h>
 
-            <p className='text-white  font-heading font-light'> These are hand-picked by our domain experts and updated constantly.</p>
+            <p className='text-white  font-heading  font-light'> These are hand-picked by our domain experts and <br/>  updated constantly.</p>
             </div>
 
-            <div className=' relative flex justify-around gap-8'>
-              <div>
-                <img src={investment} className='rounded-lg'/>
-                
-                <p className=' absolute z-1 text-white font-heading font-semibold text-sm bg-[#0328EE] p-2 rounded-full inline-block'>
-                  INVESTMENT
-                </p>
-
-             
-                <h>A Beginner's Guide to Personal Investment</h>
-                <p>Designed to help you navigate the complex world of stocks, bonds, and mutual funds</p>
-
-                <div className='flex justify-start'>
-                  <img src={face} />
-                  <div className='flex flex-col gap-1'>
-                    <h>DAVE RAMSAY</h>
-                    <p>FEB 21,2024</p>
-                  </div>
-                </div>
+            <div className='flex justify-center items-center overflow-hidden p-5'>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto'>
+        {/* Blog 1 */}
+        <div className='flex flex-col rounded-3xl  overflow-hidden'>
+          <div className='relative'>
+            <img src={investment} alt="Investment" className='  w-full'/>
+            <p className='absolute z-10 bottom-[-10%] ml-6 text-white font-heading font-semibold text-sm bg-[#0328EE] p-2 rounded-full'>
+              INVESTMENT
+            </p>
+          </div>
+          <div className='flex flex-col items-start top-0 mt-0 bg-[#010D50] p-4 gap-2'>
+            <h2 className='text-white font-heading text-xl bg-[#010D50] font-bold'>A Beginner's Guide to Personal Investment</h2>
+            <p className='text-white bg-[#010D50] font-heading text-sm'>Designed to help you navigate the complex world of stocks, bonds, and mutual funds</p>
+            <div className='flex items-center bg-[#010D50] gap-3 mt-5'>
+              <img src={face} alt="Dave Ramsay" className='w-12 h-12 rounded-full'/>
+              <div className='bg-[#010D50]'>
+                <h3 className='text-white bg-[#010D50] font-heading'>DAVE RAMSAY</h3>
+                <p className='text-white bg-[#010D50] font-heading text-sm'>FEB 21, 2024</p>
               </div>
-
-              <div>
-
-              </div>
-
-              <div>
-
-              </div>
-
-            </div>
-
-            <div>
-            <Link to='/signin' className='inline-block no-underline bg-white py-4 px-8 rounded-full mt-4 text-[#0328EE] font-heading font-bold cursor-pointer shadow-lg transition-all hover:bg-opacity-90'>
-                    EXPLORE NOW
-                </Link>
             </div>
           </div>
+        </div>
+
+        {/* Blog 1 */}
+        <div className='flex flex-col rounded-3xl  overflow-hidden'>
+          <div className='relative'>
+            <img src={investment} alt="Investment" className='  w-full'/>
+            <p className='absolute z-10  bottom-[-10%] ml-6 text-white font-heading font-semibold text-sm bg-[#0328EE] p-2 rounded-full'>
+              INVESTMENT
+            </p>
+          </div>
+          <div className='flex flex-col items-start top-0 mt-0 bg-[#010D50] p-4 gap-2'>
+            <h2 className='text-white font-heading text-xl bg-[#010D50] font-bold'>A Beginner's Guide to Personal Investment</h2>
+            <p className='text-white bg-[#010D50] font-heading text-sm'>Designed to help you navigate the complex world of stocks, bonds, and mutual funds</p>
+            <div className='flex items-center bg-[#010D50] gap-3 mt-5'>
+              <img src={face} alt="Dave Ramsay" className='w-12 h-12 rounded-full'/>
+              <div className='bg-[#010D50]'>
+                <h3 className='text-white bg-[#010D50] font-heading'>DAVE RAMSAY</h3>
+                <p className='text-white bg-[#010D50] font-heading text-sm'>FEB 21, 2024</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Blog 1 */}
+        <div className='flex flex-col rounded-3xl  overflow-hidden'>
+          <div className='relative'>
+            <img src={investment} alt="Investment" className='  w-full'/>
+            <p className='absolute z-10  bottom-[-10%] ml-6 text-white font-heading font-semibold text-sm bg-[#0328EE] p-2 rounded-full'>
+              INVESTMENT
+            </p>
+          </div>
+          <div className='flex flex-col items-start top-0 mt-0 bg-[#010D50] p-4 gap-2'>
+            <h2 className='text-white font-heading text-xl bg-[#010D50] font-bold'>A Beginner's Guide to Personal Investment</h2>
+            <p className='text-white bg-[#010D50] font-heading text-sm'>Designed to help you navigate the complex world of stocks, bonds, and mutual funds</p>
+            <div className='flex items-center bg-[#010D50] gap-3 mt-5'>
+              <img src={face} alt="Dave Ramsay" className='w-12 h-12 rounded-full'/>
+              <div className='bg-[#010D50]'>
+                <h3 className='text-white bg-[#010D50] font-heading'>DAVE RAMSAY</h3>
+                <p className='text-white bg-[#010D50] font-heading text-sm'>FEB 21, 2024</p>
+              </div>
+            </div>
+          </div>
+        </div>
+</div>
+</div>
+            <div className='mb-30'>
+            <Link to='/data' className=' mb-30 flex justify-center items-center ml-96  mr-96 no-underline bg-white p-4 rounded-full mt-10 mb-30 text-[#0328EE] font-heading font-bold cursor-pointer shadow-lg transition-all hover:bg-opacity-90'>
+            VIEW ALL ARTICLES                </Link>
+            </div>
+          </div>
+          
+
+
+          
     </div>
   )
 }
