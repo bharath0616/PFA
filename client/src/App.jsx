@@ -20,6 +20,7 @@ import Recommend from './pages/Recommend';
 import RecLR from './pages/recommendations/RecLR.jsx';
 import RecHR from './pages/recommendations/RecHR';
 import RecMR from './pages/recommendations/RecMR';
+import Contact from './pages/Contact.jsx';
 
 
 
@@ -32,6 +33,7 @@ import RecMR from './pages/recommendations/RecMR';
         <Route path='/data' element={<DataEntry/>} />
         <Route path='/blogs' element={<Blog />} />
         <Route path='/tools' element={<Tools />} />
+        <Route path='/contact-us' element={<Contact />} />
         <Route path='/recommend' element={<Recommend />} />
         <Route path='/recommendations-lr' element={<RecLR />} />
         <Route path='/recommendations-hr' element={<RecHR />} />

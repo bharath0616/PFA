@@ -1,12 +1,17 @@
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
-
+    name:{
+        type:String,
+        required:true,
+        unique:false,  
+    },
     income:{
         type:Number,
         required:true,
         unique:false,  
     },
+   
     monthlyExpenditure:{
         type:Number,
         required:true,

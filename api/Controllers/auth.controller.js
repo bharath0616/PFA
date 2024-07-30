@@ -4,12 +4,12 @@ import User from '../models/user.model.js'
 
 export const data=async(req,res,next)=>{
     try{
-        const { income, monthlyExpenditure, riskTolerance } = req.body;
+        const { income,name, monthlyExpenditure, riskTolerance } = req.body;
     
         
         const calculatedResults = performCalculations(income, monthlyExpenditure, riskTolerance);
     
-        const newUser = new User({ income, monthlyExpenditure, riskTolerance, calculatedResults });
+        const newUser = new User({ income, name, monthlyExpenditure, riskTolerance, calculatedResults });
         await newUser.save();
     
         res.status(201).json(calculatedResults);

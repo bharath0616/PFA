@@ -1,20 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import salary from '../assets/salary.png'
 import sip from '../assets/sip.png'
 import glow from '../assets/glow.png'
 import tax from '../assets/tax.png'
+import planet from '../assets/planet.png'
 import portfolio from '../assets/portfolio.png'
+import 'aos/dist/aos.css'; 
+import AOS from 'aos';
 export default function Tools() {
+  useEffect(()=>{
+    AOS.init({duration:1000, offset:100})
+  })
   return (
     
     <div className='mt-20 relative z-10'>
-    <img src={glow} className="absolute top-32 left-[-60%] bg-transparent h-full rounded-full w-full opacity-70 z-[-1]" alt="Glow"/>
-      <div className='flex flex-col gap-2 ml-80 mr-80 justify-center relative items-center'> 
-        <h className='text-white text-4xl font-heading font-bold'>
+<img src={glow} className="absolute top-12 left-[-10%] bg-transparent w-1/2 opacity-40 z-[-1] mix-blend-screen" alt="Glow"/>
+
+
+      <div className='flex flex-col gap-2 ml-80 mr-80 justify-center relative items-center' data-aos="fade-left"> 
+        <h className='text-white text-4xl font-heading font-bold' >
         PFA TOOLS
         </h>
-        <p className='text-white text-lg font-heading font-light text-center'>
+        <p className='text-white text-lg font-heading font-light text-center' >
         Based on the collected data we provide personalized financial recommendations such as salary breakdown, investment options, etc. The website will also include supplementary financial tools like salary take-home calculator, and investment return calculator.
         </p>
       </div>
@@ -23,12 +31,12 @@ export default function Tools() {
 
       <div className='flex flex-col justify-center items-start '>
       
-      <h className='text-white text-xl font-heading font-bold mb-10 ml-40 mt-20'>
+      <h className='text-white text-3xl font-heading font-bold mb-10 ml-40 mt-20' data-aos="zoom-in-right">
       What drives a financially smart individual?
       </h>
 <div className='flex flex-col gap-4 ml-40 mr-40'>
       <div className='flex justify-around gap-8 '>
-      <div className='w-1/2 p-4'>
+      <div className='w-1/2 p-4'data-aos="fade-down-right">
         <Link to='/data' className='flex bg-[#010D50] p-6
          no-underline rounded-3xl justify-center gap-4'>
             <div>
@@ -41,7 +49,7 @@ export default function Tools() {
         </Link>
         </div>
 
-        <div className='w-1/2 p-4'>
+        <div className='w-1/2 p-4' data-aos="fade-down-left">
         <Link to='/sipCalculator' className='flex bg-[#010D50] p-6 no-underline 
         rounded-3xl justify-center gap-4'>
             <div>
@@ -57,37 +65,33 @@ export default function Tools() {
         </div>
 </div>
 
-<div className='flex justify-around gap-8'>
-<div className='w-1/2 p-4'>
-<Link to='/portfolioManager' className='flex bg-[#010D50] p-6 no-underline rounded-3xl 
-justify-center gap-4'>
-            <div>
-            <img src={portfolio} className='rounded-lg'/>
-            </div>
-            <div className='flex flex-col justify-center '>
-              <h className='text-white font-heading font-semibold text-sm'>PORTFOLIO MANAGER</h>
-              <p className='text-white font-heading font-light text-sm '>
-              Track your investments, analyze performance, and make informed decisions with our comprehensive portfolio management tool.</p>
-            </div>
-        </Link>
-        </div>
-
-        <div className='w-1/2 p-4'>
-        <Link to='/taxCalculator' className='flex bg-[#010D50] p-6 no-underline
-         rounded-3xl justify-center gap-4'>
-            <div>
-            <img src={tax} className='rounded-lg'/>
-            </div>
-            <div className='flex flex-col justify-center '>
-              <h className='text-white font-heading font-semibold text-sm '>TAX CALCULATOR</h>
-              <p className='text-white font-heading font-light text-sm '>
-              Stay on top of your taxes. Estimate your tax liability and explore tax-saving options with our user-friendly tax calculator.</p>
-            </div>
-        </Link>
-        </div>
-        </div>
+    
 </div>
       </div>
+
+      {/*section----->3 */}
+      <div className='flex ml-10 justify-between items-center mt-20 space-x-4'>
+  <div className='flex-1 flex flex-col justify-center p-10 mr-20'>
+    <div className='flex flex-col justify-center items-start mb-32' data-aos="zoom-in-right">
+      <h1 className='text-white text-3xl font-heading font-bold'>Our mission</h1>
+      <p className='text-white font-heading text-md  leading-6'>
+        Empowering individuals to achieve financial well-being through personalized AI guidance. We provide a user-friendly platform with educational content and interactive tools to help you make informed decisions about budgeting, saving, investing, and overall financial planning.
+      </p>
     </div>
+    <div className='flex flex-col justify-center' data-aos="zoom-in-right"> 
+      <h1 className='text-white text-3xl font-heading font-bold'>Our story</h1>
+      <p className='text-white font-heading text-md leading-6'>
+        We believe financial literacy is the key to a secure and fulfilling future. Our story began with the desire to bridge the gap between complex financial concepts and everyday people. Fueled by this passion, we developed an AI-powered financial assistant that personalizes your financial journey. From data collection and analysis to interactive tools and educational content, we strive to be your one-stop shop for achieving financial freedom.
+      </p>
+    </div>
+  </div>
+
+  <div className='flex-1'>
+    <img src={planet} className='w-full h-full object-cover' data-aos="zoom-in-left"/>
+  </div>
+</div>
+
+    </div>
+
   )
 }
