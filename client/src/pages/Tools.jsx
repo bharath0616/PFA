@@ -20,7 +20,7 @@ export default function Tools() {
 
       <div className='flex flex-col gap-2 ml-80 mr-80 justify-center relative items-center' data-aos="fade-left"> 
         <h className='text-white text-4xl font-heading font-bold' >
-        PFA TOOLS
+        PFA EXPENSE TRACKER
         </h>
         <p className='text-white text-lg font-heading font-light text-center' >
         Based on the collected data we provide personalized financial recommendations such as salary breakdown, investment options, etc. The website will also include supplementary financial tools like salary take-home calculator, and investment return calculator.

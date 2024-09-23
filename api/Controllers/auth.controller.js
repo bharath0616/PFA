@@ -1,76 +1,79 @@
-
+import userCred from "../models/userCred.model.js";
+import bcryptjs from 'bcryptjs';
 import { errorHandler } from '../Utils/error.js';
-import User from '../models/user.model.js'
+import jwt from 'jsonwebtoken'
 
-export const data=async(req,res,next)=>{
+export const singup=async(req,res,next)=>{
     try{
-        const { income,name, monthlyExpenditure, riskTolerance } = req.body;
+    const {username,email,password}=req.body;
+    const hashPassword = bcryptjs.hashSync(password,12);
+    const newUser=new userCred({username,email,password:hashPassword})
     
-        
-        const calculatedResults = performCalculations(income, monthlyExpenditure, riskTolerance);
-    
-        const newUser = new User({ income, name, monthlyExpenditure, riskTolerance, calculatedResults });
-        await newUser.save();
-    
-        res.status(201).json(calculatedResults);
-      } catch (error) {
-        res.status(500).json({ message: error.message });
-      }
+        await newUser.save()
+        res.status(201).json("User created successfully !");
+    }
+    catch(error){
+        console.log(error);
+        next(error);
+    }
 };
-function performCalculations(income, monthlyExpenditure, riskTolerance) {
 
-  const netIncome = income - (monthlyExpenditure * 12);
+export const signin = async(req,res,next)=>{
+    const {email,password}=req.body;
+    try{
+        const validUser= await userCred.findOne({email});
+        if(!validUser) return next(errorHandler(404,'User not found!'));
+        const validPassword=bcryptjs.compareSync(password,validUser.password);
+        if(!validPassword) return next(errorHandler(404,'Incorrect password!'));
+        const token = jwt.sign({ id: validUser._id },process.env.JWT_SECRET)
+        const {password:hashedPassword, ...rest}=validUser._doc;
+        res.cookie('access_token',token,{httpOnly:true}).status(200).json(rest);
+    }
+    catch (error) {
+        next(error);
+    }
+    }
 
-  if (netIncome <= 0) {
-    throw new Error("Not enough income for investment");
-  }
-
-  let sharesPercent, mutualFundsPercent, bondsPercent, savingsPercent;
-
-  switch (riskTolerance) {
-    case 'Very high':
-      sharesPercent = 50;
-      mutualFundsPercent = 30;
-      bondsPercent = 10;
-      savingsPercent = 10;
-      break;
-    case 'High':
-      sharesPercent = 40;
-      mutualFundsPercent = 30;
-      bondsPercent = 20;
-      savingsPercent = 10;
-      break;
-    case 'Medium':
-      sharesPercent = 30;
-      mutualFundsPercent = 30;
-      bondsPercent = 30;
-      savingsPercent = 10;
-      break;
-    case 'Low':
-      sharesPercent = 20;
-      mutualFundsPercent = 30;
-      bondsPercent = 40;
-      savingsPercent = 10;
-      break;
-    case 'Very low':
-      sharesPercent = 10;
-      mutualFundsPercent = 20;
-      bondsPercent = 50;
-      savingsPercent = 20;
-      break;
-    default:
-
-      throw new Error("Invalid risk tolerance level");
-  }
-
-  return {
-    shares: calculatePercentage(netIncome, sharesPercent),
-    mutualFunds: calculatePercentage(netIncome, mutualFundsPercent),
-    bonds: calculatePercentage(netIncome, bondsPercent),
-    savings: calculatePercentage(netIncome, savingsPercent),
-  };
-}
-
-function calculatePercentage(value, percentage) {
-  return (value * percentage) / 100;
-}
+export const google = async (req, res, next) => {
+        try {
+          const user = await userCred.findOne({ email: req.body.email });
+          if (user) {
+            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+            const { password: pass, ...rest } = user._doc;
+            res
+              .cookie('access_token', token, { httpOnly: true })
+              .status(200)
+              .json(rest);
+          } else {
+            const generatedPassword =
+              Math.random().toString(36).slice(-9) +
+              Math.random().toString(36).slice(-9);
+            const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);
+            const newUser = new userCred({
+              username:
+                req.body.name.split(' ').join('').toLowerCase() +
+                Math.random().toString(36).slice(-4),
+              email: req.body.email,
+              password: hashedPassword,
+              avatar: req.body.photo,
+            });
+            await newUser.save();
+            const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+            const { password: pass, ...rest } = newUser._doc;
+            res
+              .cookie('access_token', token, { httpOnly: true })
+              .status(200)
+              .json(rest);
+          }
+        } catch (error) {
+          next(error);
+        }
+      };
+export const signOut = async (req, res, next) => {
+        try {
+          res.clearCookie('access_token');
+          res.status(200).json('User has been logged out!');
+        } catch (error) {
+          next(error);
+        }
+      };

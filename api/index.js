@@ -2,14 +2,19 @@ import express from 'express'
 import mongoose from 'mongoose';
 import dotenv from 'dotenv'
 import authRouter from './routes/auth.route.js';
-
+import calcRouter from './routes/calc.route.js';
+import userCredRouter from './routes/userCred.route.js';
+import portfolioRouter from './routes/portfolio.route.js';
+import chatRoutes from './routes/chat.route.js';
+import cookieParser from 'cookie-parser';
 import path from 'path';
 import cors from 'cors';
 
 dotenv.config();
 const app = express();
 app.use(express.json());
-mongoose.connect("mongodb+srv://mbharath1603:YC9Np8R6WwPO3omi@pfa.qn8k9jz.mongodb.net/?retryWrites=true&w=majority&appName=PFA").then(() => {
+app.use(cookieParser());
+mongoose.connect(process.env.MONGO).then(() => {
     console.log("Connected to MongoDB!");
 }).catch((err) => {
     console.log(err);
@@ -23,9 +28,12 @@ app.listen(3000, () => {
     console.log('Server is running on port 3000')
 }
 );
+
 app.use('/api/auth', authRouter);
-
-
+app.use('/api/calc', calcRouter);
+app.use('/api/userCred', userCredRouter); 
+app.use('/api/portfolio', portfolioRouter);
+app.use('/api/chat', chatRoutes);
 
 app.use(express.static(path.join(__dirname, '/client/dist')));
 

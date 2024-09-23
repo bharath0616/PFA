@@ -1,5 +1,6 @@
   import React from 'react';
-  import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+  import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
+  import { Toaster} from 'react-hot-toast';
   import Header from './components/Header';
   import Blog from './pages/Blog';
   import Home from './pages/Home';
@@ -17,10 +18,15 @@ import TaxLow from './pages/tax/TaxLow';
 import TaxMedium from './pages/tax/TaxMedium';
 import TaxHigh from './pages/tax/TaxHigh';
 import Recommend from './pages/Recommend';
-import RecLR from './pages/recommendations/RecLR.jsx';
+import RecLR from './pages/recommendations/RecLR';
 import RecHR from './pages/recommendations/RecHR';
 import RecMR from './pages/recommendations/RecMR';
 import Contact from './pages/Contact.jsx';
+import PrivateRoute from './components/PrivateRoute.jsx';
+import SignIn from './pages/Signin.jsx';
+import SignUp from './pages/Signup.jsx';
+import Profile from './pages/Profile.jsx';
+import Chatbot from './pages/Chatbot.jsx';
 
 
 
@@ -30,9 +36,12 @@ import Contact from './pages/Contact.jsx';
       <Header/>
         <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='signin' element={<SignIn />} />
+        <Route path='signup' element={<SignUp />} />
+        <Route element={<PrivateRoute />} >
         <Route path='/data' element={<DataEntry/>} />
         <Route path='/blogs' element={<Blog />} />
-        <Route path='/tools' element={<Tools />} />
+        <Route path='/expense-tracker' element={<Tools />} />
         <Route path='/contact-us' element={<Contact />} />
         <Route path='/recommend' element={<Recommend />} />
         <Route path='/recommendations-lr' element={<RecLR />} />
@@ -48,7 +57,12 @@ import Contact from './pages/Contact.jsx';
         <Route path='/taxlow' element={<TaxLow />} />
         <Route path='/taxmedium' element={<TaxMedium />} />
         <Route path='/taxhigh' element={<TaxHigh />} />
+        <Route path='/chatbot' element={<Chatbot/>} />
+        
+        <Route path='profile' element={<Profile />} />
+        </Route>
         </Routes>
+        <Toaster position="bottom-center" reverseOrder={false} />
         <Footer/>
       </Router>
     ) 

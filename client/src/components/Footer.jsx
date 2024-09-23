@@ -28,15 +28,14 @@ export default function Footer() {
       <div className='flex flex-col md:flex-row justify-around items-start mx-4 md:mx-20'>
         <div className='flex flex-col md:flex-row gap-3 mb-4 md:mb-0'>
           <div className='flex flex-col gap-2 items-start'>
-            <h2 className='text-white text-sm font-heading font-bold'>MENU</h2>
-            <hr className="bg-white mb-2 w-full" style={{ height: '0px' }}/>
+            <h2 className='text-white text-sm font-heading font-light'>MENU</h2>
+            
             <p className='text-white font-heading font-light text-xs'>HOME</p>
             <p className='text-white font-heading font-light text-xs'>CHATBOT</p>
             <p className='text-white font-heading font-light text-xs'>SUPPORT</p>
           </div>
           <div className='flex flex-col gap-2 items-start'>
             <p className='text-white font-heading font-light text-xs'>TOOLS</p>
-            <p className='text-white font-heading font-light text-xs'>BLOGS</p>
             <p className='text-white font-heading font-light text-xs'>CONTACT US</p>
           </div>
         </div>
@@ -60,7 +59,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <p className='text-white font-heading mt-10 text-center font-light text-xs'>ⒸAll rights reserved</p>
+      <p className='text-white font-heading mt-10 text-center font-light text-xs'>Ⓒ BHP- All rights reserved</p>
     </div>
   )
 }

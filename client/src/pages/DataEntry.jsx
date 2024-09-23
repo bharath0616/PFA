@@ -33,7 +33,7 @@
       e.preventDefault();
       dispatch(dataStart());
       try {
-        const response = await fetch('/api/auth/data', {
+        const response = await fetch('/api/calc/data', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData),
