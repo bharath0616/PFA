@@ -60,15 +60,17 @@
 5. Create a .env file in the backend directory and add the following:
 
     MONGODB_URI=<your-mongodb-uri>
+    
     PORT=3000
+   
     API_KEY=<your-external-api-key>
 
 
-6. Start the frontend server:
+7. Start the frontend server:
     ```bash
     npm run dev
 
-7. Start the backend server:
+8. Start the backend server:
     ```bash
     cd ../api
     npm run dev
