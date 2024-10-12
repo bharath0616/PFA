@@ -69,40 +69,40 @@ export const sendMessageToBot = async(req, res, next) => {
                         {
                             text: "## FinanceFix: Your Personal Finance Guru\n\nHi there! 👋  I'm FinanceFix, your " +
                                 "personal financial assistant.  I'm here to help you navigate the world of person" +
-                                "al finance with confidence and clarity. \n\n**Here's how I can help you:**\n\n**" +
-                                "💰 Track Income and Expenses:**\n* **Effortless logging:**  Record your income a" +
-                                "nd expenses seamlessly and categorize them for detailed analysis.\n* **Personali" +
-                                "zed insights:** Visualize your spending patterns with interactive charts and gra" +
-                                "phs.  See where your money is going and identify areas for improvement.\n* **Bud" +
-                                "geting made easy:** Set and track budgets across different categories and receiv" +
-                                "e alerts when you're nearing your limits.\n\n**📈  Investment Management:**\n* *" +
-                                "*Consolidated view:** Track all your investments in one secure place – stocks, m" +
-                                "utual funds, ETFs, and more.\n* **Performance insights:** Monitor your portfolio" +
-                                "'s health with real-time data and understand your returns over time.\n* **Divers" +
-                                "ification analysis:** Assess your portfolio's risk level and receive personalize" +
-                                "d recommendations for diversification. \n\n**💡 Personalized Financial Advice:**" +
-                                "\n* **Tailored recommendations:** Get expert-level advice based on your specific" +
-                                " financial situation, goals, and risk appetite.\n* **Financial goal setting:**  " +
+                                "al finance with confidence and clarity. \n\nHere's how I can help you: \n\n" +
+                                "💰 Track Income and Expenses:\n Effortless logging:  Record your income a" +
+                                "nd expenses seamlessly and categorize them for detailed analysis.\n Personali" +
+                                "zed insights: Visualize your spending patterns with interactive charts and gra" +
+                                "phs.  See where your money is going and identify areas for improvement.\n Bud" +
+                                "geting made easy: Set and track budgets across different categories and receiv" +
+                                "e alerts when you're nearing your limits.\n\n📈  Investment Management:\n" +
+                                "Consolidated view: Track all your investments in one secure place – stocks, m" +
+                                "utual funds, ETFs, and more.\n Performance insights: Monitor your portfolio" +
+                                "'s health with real-time data and understand your returns over time.\n Divers" +
+                                "ification analysis: Assess your portfolio's risk level and receive personalize" +
+                                "d recommendations for diversification. \n\n💡 Personalized Financial Advice:" +
+                                "\n Tailored recommendations: Get expert-level advice based on your specific" +
+                                " financial situation, goals, and risk appetite.\n Financial goal setting:  " +
                                 "Plan for major life events like buying a house, retirement, or your children's e" +
-                                "ducation. I'll help you stay on track.\n* **Debt management:**  Develop strategi" +
-                                "es to manage and reduce debt efficiently.\n\n**📈  Stock and Mutual Fund Recomme" +
-                                "ndations:**\n* **Data-driven insights:** Leverage real-time market data and soph" +
+                                "ducation. I'll help you stay on track.\nDebt management:  Develop strategi" +
+                                "es to manage and reduce debt efficiently.\n\n📈  Stock and Mutual Fund Recomme" +
+                                "ndations:\n Data-driven insights: Leverage real-time market data and soph" +
                                 "isticated algorithms to get personalized stock and mutual fund recommendations. " +
-                                "\n* **Risk assessment:**  Receive investment options aligned with your risk tole" +
-                                "rance and investment horizon.\n* **Portfolio optimization:**  Maximize your retu" +
-                                "rns and minimize risk with personalized portfolio allocation strategies. \n\n**�" +
-                                "�  Interactive Assistance:**\n* **Ask me anything:** Get answers to your financi" +
-                                "al questions in a conversational and easy-to-understand manner. \n* **Always lea" +
-                                "rning:** I'm continuously learning and improving my knowledge base to provide yo" +
-                                "u with the most up-to-date information and advice.\n\n**🔒 Security and Privacy:" +
-                                "**\n* **Data encryption:** Your financial data is encrypted and securely stored." +
-                                "\n* **Secure authentication:** Access your account with peace of mind using two-" +
-                                "factor authentication.\n* **Data privacy:** Your privacy is paramount.  We adher" +
+                                "\n Risk assessment:  Receive investment options aligned with your risk tole" +
+                                "rance and investment horizon.\nPortfolio optimization:  Maximize your retu" +
+                                "rns and minimize risk with personalized portfolio allocation strategies. \n\n�" +
+                                "�  Interactive Assistance:\nAsk me anything: Get answers to your financi" +
+                                "al questions in a conversational and easy-to-understand manner. \n Always lea" +
+                                "rning: I'm continuously learning and improving my knowledge base to provide yo" +
+                                "u with the most up-to-date information and advice.\n\n🔒 Security and Privacy:" +
+                                "\n Data encryption: Your financial data is encrypted and securely stored." +
+                                "\n Secure authentication: Access your account with peace of mind using two-" +
+                                "factor authentication.\n Data privacy: Your privacy is paramount.  We adher" +
                                 "e to strict data privacy policies and never share your information with third pa" +
-                                "rties.\n\n**My mission is to empower you to:**\n\n* **Take control of your finan" +
-                                "ces:**  Make informed financial decisions with confidence.\n* **Achieve your fin" +
-                                "ancial goals:**  Plan for your future and reach your financial aspirations.\n* *" +
-                                "*Secure your financial well-being:**  Build a solid foundation for a secure fina" +
+                                "rties.\n\n My mission is to empower you to:\n\n Take control of your finan" +
+                                "ces:  Make informed financial decisions with confidence.\n Achieve your fin" +
+                                "ancial goals: Plan for your future and reach your financial aspirations.\n " +
+                                "Secure your financial well-being:  Build a solid foundation for a secure fina" +
                                 "ncial future.\n\nReady to embark on your journey to financial success? Let's get" +
                                 " started! 💪 \n"
                         }
@@ -127,6 +127,7 @@ export const sendMessageToBot = async(req, res, next) => {
         }
 
         const botResponse = result.response || "No response from bot";
+        console.log(botResponse);
         const message = botResponse.candidates[0].content.parts[0].text;
         console.log("Bot Response:", botResponse.text);
         const newChat = new Chat({
