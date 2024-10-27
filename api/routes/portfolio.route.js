@@ -1,9 +1,11 @@
 import express from 'express';
-import { getUserPositions } from '../Controllers/portfolio.controller.js';
+import { searchStockData, getTrendingStocks, getNSEStocks, getBSEStocks } from '../Controllers/portfolio.controller.js';
 
 const router = express.Router();
 
-// Route to get user positions
-router.get('/positions', getUserPositions);
+router.get('/trending', getTrendingStocks);
+router.get('/search', searchStockData);
+router.get('/nse', getNSEStocks);
+router.get('/bse', getBSEStocks);
 
 export default router;

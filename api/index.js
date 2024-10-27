@@ -32,8 +32,8 @@ app.listen(3000, () => {
 app.use('/api/auth', authRouter);
 app.use('/api/calc', calcRouter);
 app.use('/api/userCred', userCredRouter); 
-app.use('/api/portfolio', portfolioRouter);
-app.use('/api/chat', chatRoutes);
+app.use('/api/stocks', portfolioRouter);
+app.use('/api/chat', chatRoutes);   
 
 app.use(express.static(path.join(__dirname, '/client/dist')));
 

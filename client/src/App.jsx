@@ -27,6 +27,7 @@ import SignIn from './pages/Signin.jsx';
 import SignUp from './pages/Signup.jsx';
 import Profile from './pages/Profile.jsx';
 import Chatbot from './pages/Chatbot.jsx';
+import Stocks from './pages/Stocks.jsx';
 
 
 
@@ -51,6 +52,7 @@ import Chatbot from './pages/Chatbot.jsx';
         <Route path='/sipCalculator' element={<SipCalculator />} />
         <Route path='/taxCalculator' element={<TaxCalculator />} />
         <Route path='/portfolioManager' element={<PortfolioManager />} />
+        <Route path='/stocks' element={<Stocks />} />
         <Route path='/siplow' element={<SipLow />} />
         <Route path='/sipmedium' element={<SipMedium />} />
         <Route path='/siphigh' element={<SipHigh />} />
