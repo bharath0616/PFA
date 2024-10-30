@@ -28,7 +28,7 @@ import SignUp from './pages/Signup.jsx';
 import Profile from './pages/Profile.jsx';
 import Chatbot from './pages/Chatbot.jsx';
 import Stocks from './pages/Stocks.jsx';
-
+import Portfolio from './pages/Portfolio.jsx';
 
 
   export default function App() {
@@ -52,6 +52,7 @@ import Stocks from './pages/Stocks.jsx';
         <Route path='/sipCalculator' element={<SipCalculator />} />
         <Route path='/taxCalculator' element={<TaxCalculator />} />
         <Route path='/portfolioManager' element={<PortfolioManager />} />
+        <Route path='/holdings' element={<Portfolio />} />
         <Route path='/stocks' element={<Stocks />} />
         <Route path='/siplow' element={<SipLow />} />
         <Route path='/sipmedium' element={<SipMedium />} />

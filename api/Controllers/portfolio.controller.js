@@ -9,7 +9,7 @@ const SEARCH_API_URL = 'https://indian-stock-exchange-api2.p.rapidapi.com/stock'
 const NSE_API_URL = 'https://indian-stock-exchange-api2.p.rapidapi.com/NSE_most_active';
 const BSE_API_URL = 'https://indian-stock-exchange-api2.p.rapidapi.com/BSE_most_active';
 
-//trending stocks (top gainers and losers)
+//trendingstocks (top gainers and losers)
 export const getTrendingStocks = async (req, res) => {
   try {
     const response = await axios.get(TRENDING_API_URL, {

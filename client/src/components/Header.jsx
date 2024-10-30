@@ -39,7 +39,7 @@ export default function Header() {
 
           {/* Navigation Links */}
           <ul className={`absolute sm:relative bg-black sm:bg-transparent transform ${isOpen ? 'translate-y-0' : '-translate-y-full'} transition-transform duration-300 ease-in-out top-full left-0 w-full sm:w-auto flex-col sm:flex-row gap-4 list-none px-4 sm:px-0 z-20 sm:flex ${!isOpen && 'hidden'}`}>
-            {['/expense-tracker', '/chatbot', '/contact-us'].map((path, index) => (
+            {['/expense-tracker', '/chatbot', '/stocks','/holdings','/contact-us',].map((path, index) => (
               <Link key={index} to={path} className='no-underline'>
                 <li className='text-white text-sm sm:text-md font-heading font-light cursor-pointer p-3 hover:bg-[#0328EE] sm:hover:bg-transparent sm:hover:text-[#0328EE]' onClick={toggleMenu}>
                   {path.substring(1).toUpperCase()}

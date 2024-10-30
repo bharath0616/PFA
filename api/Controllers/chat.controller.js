@@ -13,7 +13,7 @@ const generationConfig = {
     responseMimeType: 'text/plain'
 };
 
-// Function to interact with Google Generative AI and save the conversation
+
 export const sendMessageToBot = async(req, res, next) => {
     try {
         const {userMessage} = req.body;
@@ -113,7 +113,7 @@ export const sendMessageToBot = async(req, res, next) => {
 
         result = await chatSession.sendMessage(userMessage);
                 if (result) {
-                    break;  // Exit the loop if the message is successfully sent
+                    break;  
                 }
             } catch (error) {
                 console.error('Error during API request:', error.message);
@@ -131,18 +131,18 @@ export const sendMessageToBot = async(req, res, next) => {
         const message = botResponse.candidates[0].content.parts[0].text;
         console.log("Bot Response:", botResponse.text);
         const newChat = new Chat({
+            userId: req.user.id,
             userMessage,
             botResponse: message,
         });
         await newChat.save();
 
-        // Send the chatbot's response back to the client
         res.status(200).json({ success: true, message });
 
     } catch (error) {
         console.error('Error while sending message to bot:', error);
 
-        // Send the error response to the client with the detailed error message
+      
         res.status(500).json({
             success: false,
             message: 'Error in sending message to bot',
@@ -150,19 +150,16 @@ export const sendMessageToBot = async(req, res, next) => {
         });
     }
 };
-export const getChatHistory = async(req, res, next) => {
+export const getChatHistory = async (req, res, next) => {
     try {
         const chats = await Chat
-            .find()
-            .sort({createdAt: -1})
+            .find({ userId: req.user.id }) 
+            .sort({ createdAt: -1 })
             .limit(50);
-        res
-            .status(200)
-            .json({success: true, data: chats});
+
+        res.status(200).json({ success: true, data: chats });
     } catch (error) {
-        console.error(error);
-        res
-            .status(500)
-            .json({success: false, message: 'Error in fetching chat history'});
+        console.error('Error in fetching chat history:', error);
+        res.status(500).json({ success: false, message: 'Error in fetching chat history' });
     }
 };

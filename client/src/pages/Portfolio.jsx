@@ -1,80 +1,103 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import StockCard from '../components/stockApi/StockCard';
-import StockChart from '../components/stockApi/StockChart';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchHoldings, addOrUpdateStock, removeStock } from '../redux/holdings/holdingsSlice';
 
-const Stocks = () => {
-  const [stocks, setStocks] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedStock, setSelectedStock] = useState(null);
+export default function Portfolio() {
+  const userId = useSelector((state) => state.user.currentUser?._id) || localStorage.getItem("userId");
+  const dispatch = useDispatch();
+  const { holdings, totalValue = 0, investedValue = 0, loading, error } = useSelector((state) => state.holdings);
 
-  // Fetch trending stocks (top gainers and losers) on initial load
   useEffect(() => {
-    const fetchTrendingStocks = async () => {
-      try {
-        const response = await axios.get('/api/trending-stocks');
-        const { trending_stocks } = response.data;
-        const combinedStocks = [
-          ...trending_stocks.top_gainers,
-          ...trending_stocks.top_losers,
-        ];
-        setStocks(combinedStocks);
-      } catch (error) {
-        console.error("Error fetching trending stocks:", error);
-      }
-    };
-    fetchTrendingStocks();
-  }, []);
+    dispatch(fetchHoldings(userId));
+  }, [dispatch, userId]);
 
-  // Handle stock search when form is submitted
-  const handleSearch = async (event) => {
-    event.preventDefault();
-    if (searchTerm) {
-      try {
-        const response = await axios.get(`/api/search-stock?name=${searchTerm}`);
-        setStocks(response.data); // Update stocks based on search result
-      } catch (error) {
-        console.error("Error searching for stock:", error);
-      }
-    }
+  const handleIncreaseQuantity = (stockName) => {
+    dispatch(addOrUpdateStock(userId, stockName, 1));
   };
 
+  const handleDecreaseQuantity = (stockName) => {
+    dispatch(addOrUpdateStock(userId, stockName, -1));
+  };
+
+  const handleRemoveStock = (stockName) => {
+    dispatch(removeStock(userId, stockName));
+  };
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+
+  const difference = totalValue - investedValue;
+  const differenceColor = difference >= 0 ? 'text-green-500' : 'text-red-500';
+
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-center text-blue-600 mb-8">Stock Dashboard</h1>
+    <div className="p-8">
+      <div className="bg-dark p-6 rounded-lg shadow-lg text-white mb-8">
+        <h1 className="text-5xl font-semibold">₹{totalValue ? totalValue.toLocaleString() : '0'}</h1>
+        <p className="text-lg font-medium text-gray-400">Current Value</p>
+        <p className="text-lg font-medium text-gray-400 mt-2">
+          Invested Value: ₹{investedValue ? investedValue.toLocaleString() : '0'}
+        </p>
+        <p className={`text-lg font-medium ${differenceColor} mt-2`}>
+          Difference: ₹{difference ? difference.toLocaleString() : '0'} ({investedValue ? ((difference / investedValue) * 100).toFixed(2) : 0}%)
+        </p>
+      </div>
 
-        {/* Search Form */}
-        <form onSubmit={handleSearch} className="flex items-center space-x-4 mb-8">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search for a stock..."
-            className="flex-grow p-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
-          />
-          <button
-            type="submit"
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-          >
-            Search
-          </button>
-        </form>
-
-        {/* Stock Card */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <StockCard stocks={stocks} onSelectStock={setSelectedStock} />
+      <div className="bg-gray-900 p-4 rounded-lg shadow-lg">
+        <div className="flex justify-between items-center pb-4 border-b border-gray-700 mb-4">
+          <h2 className="text-xl font-semibold text-white">Holdings ({holdings.length})</h2>
         </div>
 
-        {/* Stock Detail */}
-        {selectedStock && (
-          <div className="mt-10">
-            <StockChart stock={selectedStock} />
-          </div>
-        )}
+        {holdings.map((stock) => {
+          const investedAmount = stock.investedAmount || (stock.purchasePrice * stock.quantity);
+
+          return (
+            <div
+              key={stock.name}
+              className="bg-gray-800 text-white p-4 rounded-lg mb-4 flex justify-between items-center"
+            >
+              <div>
+                <h3 className="text-lg font-bold">{stock.name}</h3>
+                <p className="text-sm text-gray-400">
+                  {stock.quantity || 0} shares • Avg Buy Price: ₹{(investedAmount / (stock.quantity || 1)).toLocaleString() || 'N/A'}
+                </p>
+                <p className="text-sm font-medium mt-1">
+                  MKT Price: BSE: ₹{stock.currentPrice?.BSE || 'N/A'}, NSE: ₹{stock.currentPrice?.NSE || 'N/A'}
+                </p>
+                <p className="text-sm font-medium mt-1">
+                  Invested Amount: ₹{(investedAmount || 0).toLocaleString()}
+                </p>
+                <p className="text-sm font-medium mt-1">
+                  Current Value: ₹{stock.currentValue ? stock.currentValue.toLocaleString() : 'N/A'}
+                </p>
+                <p className={`text-sm font-medium mt-1 ${stock.currentValue - investedAmount >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+                  Difference: ₹{((stock.currentValue || 0) - (investedAmount || 0)).toLocaleString()}
+                </p>
+              </div>
+              <div className="flex items-center space-x-2">
+                <button
+                  className="bg-green-600 text-white font-bold px-3 py-1 rounded"
+                  onClick={() => handleIncreaseQuantity(stock.name)}
+                >
+                  +
+                </button>
+                <button
+                  className="bg-yellow-500 text-white font-bold px-3 py-1 rounded"
+                  onClick={() => handleDecreaseQuantity(stock.name)}
+                  disabled={(stock.quantity || 0) <= 1}
+                >
+                  -
+                </button>
+                <button
+                  className="bg-red-500 text-white font-bold px-3 py-1 rounded"
+                  onClick={() => handleRemoveStock(stock.name)}
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
-};
-
-export default Stocks;
+}

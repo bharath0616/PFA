@@ -4,14 +4,13 @@ import axios from 'axios';
 const Chatbot = () => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
-    const [showHistory, setShowHistory] = useState(false); // State to toggle chat history visibility
+    const [showHistory, setShowHistory] = useState(false); 
 
-    // Refs for input focus and scrolling to bottom
     const inputRef = useRef(null);
     const chatBoxRef = useRef(null);
 
     useEffect(() => {
-        // Fetch chat history on load, but don't display it immediately
+
         const fetchChatHistory = async () => {
             try {
                 const res = await axios.get('/api/chat/history');
@@ -21,7 +20,7 @@ const Chatbot = () => {
             }
         };
 
-        // Focus on the input box when the page loads
+
         if (inputRef.current) {
             inputRef.current.focus();
         }
@@ -29,7 +28,7 @@ const Chatbot = () => {
     }, []);
 
     useEffect(() => {
-        // Scroll to the bottom of the chat box when messages update
+       
         if (chatBoxRef.current) {
             chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
         }
@@ -37,21 +36,20 @@ const Chatbot = () => {
 
     const sendMessage = async () => {
         if (input.trim() === '') return;
-        const tempUserMessage = input; // Store the user message before clearing the input
-        setInput(''); // Clear the input field immediately for better user experience
+        const tempUserMessage = input; 
+        setInput(''); 
     
-        // Optimistically add the user's message to the chat
+
         setMessages((prevMessages) => [
             ...prevMessages,
-            { userMessage: tempUserMessage, botResponse: 'Typing...' } // Temporary response until the bot replies
+            { userMessage: tempUserMessage, botResponse: 'Typing...' } 
         ]);
     
         try {
             const res = await axios.post('/api/chat/send-message', {
                 userMessage: tempUserMessage,
             });
-    
-            // Update the latest message with the actual bot response
+
             setMessages((prevMessages) => {
                 const updatedMessages = [...prevMessages];
                 updatedMessages[updatedMessages.length - 1].botResponse = res.data.message;
@@ -67,7 +65,6 @@ const Chatbot = () => {
         }
     };
 
-    // Function to toggle chat history visibility
     const toggleHistory = () => {
         setShowHistory((prevShowHistory) => !prevShowHistory);
     };
@@ -76,7 +73,7 @@ const Chatbot = () => {
         <div className="flex flex-col items-center justify-center max-w-xl mx-auto bg-gray-900 bg-opacity-70 backdrop-blur-lg rounded-xl p-6 shadow-2xl mt-10">
             <h2 className="text-2xl font-semibold mb-6 text-gray-100">Chatbot</h2>
 
-            {/* Button to toggle chat history */}
+
             <button
                 className="mb-4 bg-gray-700 text-gray-100 rounded-lg px-4 py-2 text-sm hover:bg-gray-600 transition-shadow shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
                 onClick={toggleHistory}
@@ -85,7 +82,7 @@ const Chatbot = () => {
             </button>
 
             <div ref={chatBoxRef} className="chat-box h-96 w-full bg-gray-800 bg-opacity-30 backdrop-blur-lg border border-gray-600 rounded-lg overflow-y-auto p-4 mb-4 shadow-inner transition-all duration-300">
-                {/* Display history only if showHistory is true */}
+           
                 {showHistory ? (
                     <>
                         <h4 className="text-gray-400 text-sm mb-4">Chat History</h4>
@@ -103,7 +100,7 @@ const Chatbot = () => {
                 ) : (
                     <>
                         <h4 className="text-gray-400 text-sm mb-4">Current Chat</h4>
-                        {/* Show only the latest message when history is hidden */}
+                      
                         {messages.slice(-1).map((msg, index) => (
                             <div key={index} className="chat-message mb-4">
                                 <div className="user-message bg-gray-600 bg-opacity-70 backdrop-blur-md text-gray-100 rounded-lg p-4 mb-2 max-w-xs self-start shadow-lg">
@@ -122,7 +119,7 @@ const Chatbot = () => {
                 <input
                     type="text"
                     value={input}
-                    ref={inputRef}  // Attach the ref to the input field
+                    ref={inputRef}  
                     onChange={(e) => setInput(e.target.value)}
                     placeholder="Type your message..."
                     className="flex-grow border border-gray-600 bg-gray-700 bg-opacity-50 text-gray-200 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-lg backdrop-blur-md"
