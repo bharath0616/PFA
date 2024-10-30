@@ -14,6 +14,7 @@ export default function SignIn() {
   const dispatch=useDispatch();
   const navigate=useNavigate();
   const [isCaptchaValid, setIsCaptchaValid] = useState(false);
+  
   const handleChange=(e)=>{
     setFormData({
       ...formData, //keeps track of the user entered data
@@ -50,6 +51,11 @@ export default function SignIn() {
       dispatch(signinFailure(error.message));
     }
   };
+  useEffect(() => {
+    if (userId) {
+      localStorage.setItem("userId", userId);
+    }
+  }, [userId]);
   return (
     <div className='mr-4 ml-4'>
     <div className='p-4 max-w-lg mx-auto bg-[#b8c0c4] border-2 black mt-8 rounded-xl shadow-xl'>

@@ -5,6 +5,8 @@ import StockCard from '../components/stockApi/StockCard';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import SearchStockCard from '../components/stockApi/SearchStockCard';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchHoldings } from '../redux/holdings/holdingsSlice';
 
 export default function Stocks() {
   const [trendingStocks, setTrendingStocks] = useState({ top_gainers: [], top_losers: [] });
@@ -13,7 +15,18 @@ export default function Stocks() {
   const [searchedStocks, setSearchedStocks] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Fetch trending stocks on component mount
+  const userId = useSelector((state) => state.user.currentUser?._id) || localStorage.getItem("userId");
+
+ 
+  const holdings = useSelector((state) => state.holdings.holdings);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (userId) {
+      dispatch(fetchHoldings(userId));
+    }
+  }, [dispatch, userId]);
+
   useEffect(() => {
     const fetchTrendingStocks = async () => {
       try {
@@ -47,7 +60,6 @@ export default function Stocks() {
     fetchBseStocks();
   }, []);
 
-  // Fetch search results
   const handleSearch = async (event) => {
     event.preventDefault();
     if (searchTerm) {
@@ -58,11 +70,10 @@ export default function Stocks() {
         console.error("Error searching for stock:", error);
       }
     } else {
-      setSearchedStocks([]); // Clear search results if input is empty
+      setSearchedStocks([]);
     }
   };
 
-  // Slider settings
   const sliderSettings = {
     dots: false,
     infinite: false,
@@ -70,27 +81,9 @@ export default function Stocks() {
     slidesToShow: 4,
     slidesToScroll: 2,
     responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
+      { breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 2 } },
+      { breakpoint: 768, settings: { slidesToShow: 2, slidesToScroll: 1 } },
+      { breakpoint: 480, settings: { slidesToShow: 1, slidesToScroll: 1 } },
     ],
   };
 
@@ -98,8 +91,7 @@ export default function Stocks() {
     <div className="min-h-screen bg-[#010D50] p-8">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl font-bold text-center text-white mb-10">Stock Dashboard</h1>
-
-        {/* Search Form */}
+        
         <form onSubmit={handleSearch} className="flex items-center space-x-4 mb-8">
           <input
             type="text"
@@ -108,53 +100,46 @@ export default function Stocks() {
             placeholder="Search for a stock..."
             className="flex-grow p-3 rounded-lg border border-gray-300 focus:outline-none focus:border-[#0328EE]"
           />
-          <button
-            type="submit"
-            className="px-6 py-3 bg-[#0328EE] text-white rounded-lg hover:bg-[#031DBF] transition"
-          >
+          <button type="submit" className="px-6 py-3 bg-[#0328EE] text-white rounded-lg hover:bg-[#031DBF] transition">
             Search
           </button>
         </form>
 
-        {/* Display Searched Stocks */}
         {searchedStocks.length > 0 && (
           <div className="mb-8">
             <h2 className="text-2xl font-bold text-white mb-4">Search Results</h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {searchedStocks.map((stock) => (
-                <SearchStockCard key={stock.ticker} stock={stock} />
+                <SearchStockCard key={stock.ticker} stock={stock} userId={userId} />
               ))}
             </div>
           </div>
         )}
 
-        {/* Top NSE Stocks */}
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-white mb-4">Top NSE Stocks</h2>
           <Slider {...sliderSettings}>
             {nseStocks.map((stock) => (
-              <StockCard key={stock.ticker_id} stock={stock} />
+              <StockCard key={stock.ticker_id} stock={stock} userId={userId} />
             ))}
           </Slider>
         </div>
 
-        {/* Top BSE Stocks */}
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-white mb-4">Top BSE Stocks</h2>
           <Slider {...sliderSettings}>
             {bseStocks.map((stock) => (
-              <StockCard key={stock.ticker_id} stock={stock} />
+              <StockCard key={stock.ticker_id} stock={stock} userId={userId} />
             ))}
           </Slider>
         </div>
 
-        {/* Trending Stocks */}
         <h2 className="text-2xl font-bold text-white mb-4">Trending Stocks</h2>
         <div className="mb-6">
           <h3 className="text-xl font-semibold text-green-400 mb-4">Top Gainers</h3>
           <Slider {...sliderSettings}>
             {trendingStocks.top_gainers.map((stock) => (
-              <StockCard key={stock.ticker_id} stock={stock} />
+              <StockCard key={stock.ticker_id} stock={stock} userId={userId} />
             ))}
           </Slider>
         </div>
@@ -163,7 +148,7 @@ export default function Stocks() {
           <h3 className="text-xl font-semibold text-red-400 mb-4">Top Losers</h3>
           <Slider {...sliderSettings}>
             {trendingStocks.top_losers.map((stock) => (
-              <StockCard key={stock.ticker_id} stock={stock} />
+              <StockCard key={stock.ticker_id} stock={stock} userId={userId} />
             ))}
           </Slider>
         </div>
