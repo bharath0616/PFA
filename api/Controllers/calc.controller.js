@@ -5,10 +5,13 @@ import { verifyToken } from '../Utils/verifyUser.js';
 
 export const data = async (req, res, next) => {
     try {
-        const { income, name, monthlyExpenditure, riskTolerance } = req.body;
-        
+        if (!req.user || !req.user.id) {
+            return res.status(401).json({ message: "User not authenticated" });
+        }
 
+        const { income, name, monthlyExpenditure, riskTolerance } = req.body;
         const calculatedResults = performCalculations(income, monthlyExpenditure, riskTolerance);
+        
         const newUser = await User.findOneAndUpdate(
             { userId: req.user.id },
             {
@@ -19,7 +22,7 @@ export const data = async (req, res, next) => {
                 riskTolerance,
                 calculatedResults,
             },
-            { upsert: true, new: true } 
+            { upsert: true, new: true }
         );
 
         res.status(201).json(calculatedResults);
@@ -27,6 +30,7 @@ export const data = async (req, res, next) => {
         next(errorHandler(500, error.message));
     }
 };
+
 
 function performCalculations(income, monthlyExpenditure, riskTolerance) {
     const netIncome = income - (monthlyExpenditure * 12);

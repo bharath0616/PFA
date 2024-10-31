@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import ReactMarkdown from 'react-markdown';
 
 const Chatbot = () => {
     const [messages, setMessages] = useState([]);
@@ -10,7 +11,6 @@ const Chatbot = () => {
     const chatBoxRef = useRef(null);
 
     useEffect(() => {
-
         const fetchChatHistory = async () => {
             try {
                 const res = await axios.get('/api/chat/history');
@@ -20,7 +20,6 @@ const Chatbot = () => {
             }
         };
 
-
         if (inputRef.current) {
             inputRef.current.focus();
         }
@@ -28,7 +27,6 @@ const Chatbot = () => {
     }, []);
 
     useEffect(() => {
-       
         if (chatBoxRef.current) {
             chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
         }
@@ -38,7 +36,6 @@ const Chatbot = () => {
         if (input.trim() === '') return;
         const tempUserMessage = input; 
         setInput(''); 
-    
 
         setMessages((prevMessages) => [
             ...prevMessages,
@@ -73,7 +70,6 @@ const Chatbot = () => {
         <div className="flex flex-col items-center justify-center max-w-xl mx-auto bg-gray-900 bg-opacity-70 backdrop-blur-lg rounded-xl p-6 shadow-2xl mt-10">
             <h2 className="text-2xl font-semibold mb-6 text-gray-100">Chatbot</h2>
 
-
             <button
                 className="mb-4 bg-gray-700 text-gray-100 rounded-lg px-4 py-2 text-sm hover:bg-gray-600 transition-shadow shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
                 onClick={toggleHistory}
@@ -82,7 +78,6 @@ const Chatbot = () => {
             </button>
 
             <div ref={chatBoxRef} className="chat-box h-96 w-full bg-gray-800 bg-opacity-30 backdrop-blur-lg border border-gray-600 rounded-lg overflow-y-auto p-4 mb-4 shadow-inner transition-all duration-300">
-           
                 {showHistory ? (
                     <>
                         <h4 className="text-gray-400 text-sm mb-4">Chat History</h4>
@@ -92,7 +87,8 @@ const Chatbot = () => {
                                     <p className="text-sm"><strong>User:</strong> {msg.userMessage}</p>
                                 </div>
                                 <div className="bot-message bg-gray-700 bg-opacity-70 backdrop-blur-md text-gray-100 rounded-lg p-4 max-w-xs self-end shadow-lg">
-                                    <p className="text-sm"><strong>Finance Fix:</strong> {msg.botResponse}</p>
+                                    {/* Render bot response with Markdown formatting */}
+                                    <p className="text-sm"><strong>Finance Fix:</strong> <ReactMarkdown>{msg.botResponse}</ReactMarkdown></p>
                                 </div>
                             </div>
                         ))}
@@ -100,14 +96,14 @@ const Chatbot = () => {
                 ) : (
                     <>
                         <h4 className="text-gray-400 text-sm mb-4">Current Chat</h4>
-                      
                         {messages.slice(-1).map((msg, index) => (
                             <div key={index} className="chat-message mb-4">
                                 <div className="user-message bg-gray-600 bg-opacity-70 backdrop-blur-md text-gray-100 rounded-lg p-4 mb-2 max-w-xs self-start shadow-lg">
                                     <p className="text-sm"><strong>User:</strong> {msg.userMessage}</p>
                                 </div>
                                 <div className="bot-message bg-gray-700 bg-opacity-70 backdrop-blur-md text-gray-100 rounded-lg p-4 max-w-xs self-end shadow-lg">
-                                    <p className="text-sm"><strong>Finance Fix:</strong> {msg.botResponse}</p>
+                                    {/* Render bot response with Markdown formatting */}
+                                    <p className="text-sm"><strong>Finance Fix:</strong> <ReactMarkdown>{msg.botResponse}</ReactMarkdown></p>
                                 </div>
                             </div>
                         ))}

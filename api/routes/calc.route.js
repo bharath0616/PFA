@@ -1,7 +1,8 @@
-import express from 'express'
-import {data} from '../Controllers/calc.controller.js'
-const router=express.Router();
+import express from 'express';
+import { data } from '../Controllers/calc.controller.js';
+import { verifyToken } from '../Utils/verifyUser.js';
 
-router.post('/data',data);
+const router = express.Router();
+router.post('/data', verifyToken, data);
 
 export default router;
