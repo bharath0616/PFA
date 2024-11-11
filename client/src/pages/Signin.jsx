@@ -2,7 +2,7 @@
 import React from 'react'
 import toast from 'react-hot-toast';
 import { Link,useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLock,faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,14 +10,14 @@ import { signinStart,signinSuccess,signinFailure } from '../redux/user/userSlice
 import OAuth from '../components/OAuth';
 export default function SignIn() {
   const [formData, setFormData] = useState({})
-  const {loading , error} =useSelector((state)=>state.user)
+  const { loading, error, currentUser } = useSelector((state) => state.user);
   const dispatch=useDispatch();
   const navigate=useNavigate();
   const [isCaptchaValid, setIsCaptchaValid] = useState(false);
   
   const handleChange=(e)=>{
     setFormData({
-      ...formData, //keeps track of the user entered data
+      ...formData,
       [e.target.id]:e.target.value,
     });
   };
@@ -52,10 +52,10 @@ export default function SignIn() {
     }
   };
   useEffect(() => {
-    if (userId) {
-      localStorage.setItem("userId", userId);
+    if (currentUser?.id) { 
+      localStorage.setItem("userId", currentUser.id);
     }
-  }, [userId]);
+  }, [currentUser]);
   return (
     <div className='mr-4 ml-4'>
     <div className='p-4 max-w-lg mx-auto bg-[#b8c0c4] border-2 black mt-8 rounded-xl shadow-xl'>
