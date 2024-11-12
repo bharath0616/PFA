@@ -6,10 +6,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
-    fontFamily:{
-        heading:["DM Sans", "sans-serif"],
-    }
+    extend: {
+      fontFamily: {
+        heading: ["DM Sans", "sans-serif"], // Set DM Sans as the default font for all text
+      },
+    },
   },
   plugins: [],
 }

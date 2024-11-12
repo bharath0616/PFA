@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
 
-// Image imports
 import pc from '../assets/pc.png';
 import glow from '../assets/glow.png';
 import g1 from '../assets/g1.png';

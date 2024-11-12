@@ -29,6 +29,7 @@ import Profile from './pages/Profile.jsx';
 import Chatbot from './pages/Chatbot.jsx';
 import Stocks from './pages/Stocks.jsx';
 import Portfolio from './pages/Portfolio.jsx';
+import SalaryCalculator from './pages/SalaryCalculator.jsx';
 
 
   export default function App() {
@@ -51,6 +52,7 @@ import Portfolio from './pages/Portfolio.jsx';
         <Route path='/salarBreakdown' element={<SalaryBreakdown />} />
         <Route path='/sipCalculator' element={<SipCalculator />} />
         <Route path='/taxCalculator' element={<TaxCalculator />} />
+        <Route path='/salaryCalculator' element={<SalaryCalculator />} />
         <Route path='/portfolioManager' element={<PortfolioManager />} />
         <Route path='/holdings' element={<Portfolio />} />
         <Route path='/stocks' element={<Stocks />} />
