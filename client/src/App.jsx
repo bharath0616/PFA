@@ -30,12 +30,14 @@ import Chatbot from './pages/Chatbot.jsx';
 import Stocks from './pages/Stocks.jsx';
 import Portfolio from './pages/Portfolio.jsx';
 import SalaryCalculator from './pages/SalaryCalculator.jsx';
+import ChatbotWidget from './components/widgets/chatbotWidget.jsx';
 
 
   export default function App() {
     return (  
       <Router>
       <Header/>
+      <ChatbotWidget/>
         <Routes>
         <Route path='/' element={<Home />} />
         <Route path='signin' element={<SignIn />} />

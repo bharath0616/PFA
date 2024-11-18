@@ -41,7 +41,7 @@ export default function StockCard({ stock, userId }) {
 
   return (
     <div className="p-4 bg-[#010D50] rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 w-56 h-80 relative text-white">
-      <Toaster />
+
       <div className="flex items-center space-x-3 mb-4">
         <div className="bg-[#0328EE] w-10 h-10 rounded-full flex items-center justify-center">
           <span className="text-lg font-bold text-white">{(stock.company || stock.company_name || "N/A")[0]}</span>

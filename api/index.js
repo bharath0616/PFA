@@ -7,6 +7,7 @@ import userCredRouter from './routes/userCred.route.js';
 import portfolioRouter from './routes/portfolio.route.js';
 import holdingsRouter from './routes/holdings.route.js';
 import chatRoutes from './routes/chat.route.js';
+import contactRoutes from './routes/contact.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import cors from 'cors';
@@ -36,6 +37,7 @@ app.use('/api/userCred', userCredRouter);
 app.use('/api/stocks', portfolioRouter);
 app.use('/api/chat', chatRoutes);   
 app.use('/api/holdings', holdingsRouter);   
+app.use('/api', contactRoutes);    
 
 app.use(express.static(path.join(__dirname, '/client/dist')));
 

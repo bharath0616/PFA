@@ -28,7 +28,7 @@ export default function Header() {
         <div className='flex items-center gap-8'>
           <Link to='/' className='no-underline text-white'>
             <h1 className='text-white font-bold text-md sm:text-lg font-heading cursor-pointer p-3'>
-              <span className=''>PFA</span>
+              <span className=''>Finance Fix</span>
             </h1>
           </Link>
 

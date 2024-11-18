@@ -10,7 +10,7 @@ export default function Footer() {
     <div className='mt-32 bg-[#010D50] p-10'>
       <div className='flex flex-col md:flex-row justify-between items-center mx-4 md:mx-20 mb-10'>
         <Link to="/" className='no-underline text-xl font-bold font-heading text-white'>
-          PFA
+          Finance Fix
         </Link>
         <div className='flex gap-2 mt-4 md:mt-0'>
           <a href="https://www.instagram.com/bharath0616/" target="_blank" rel="noopener noreferrer">

@@ -5,13 +5,11 @@ const RAPIDAPI_KEY = process.env.RAPIDAPI_KEY;
 const SEARCH_API_URL = 'https://indian-stock-exchange-api2.p.rapidapi.com/stock';
 
 export const addOrUpdateStock = async (req, res) => {
-  const { userId: userData } = req.body;
-  
-  // Extract actual fields from nested userData
-  const userId = userData.userId;
-  const { stockName, quantity, purchasePrice } = userData;
+  const { userId, stockName, quantity, purchasePrice } = req.body;
 
-  console.log("Received data:", userData);
+  
+  
+  console.log("Received Payload:", req.body);
 
   if (!userId || !stockName || quantity === undefined || purchasePrice === undefined) {
     return res.status(400).json({ message: "All fields (userId, stockName, quantity, purchasePrice) are required." });
@@ -24,7 +22,7 @@ export const addOrUpdateStock = async (req, res) => {
       const stockIndex = holdings.stocks.findIndex((s) => s.name === stockName);
       if (stockIndex !== -1) {
         holdings.stocks[stockIndex].quantity += quantity;
-        holdings.stocks[stockIndex].purchasePrice = purchasePrice; // Update purchase price if needed
+        holdings.stocks[stockIndex].purchasePrice = purchasePrice;
       } else {
         holdings.stocks.push({ name: stockName, quantity, purchasePrice });
       }
@@ -49,7 +47,6 @@ export const getUserHoldings = async (req, res) => {
 
     if (!holdings) return res.json({ stocks: [], totalValue: 0, totalInvestedValue: 0 });
 
-    // Fetch current prices for each stock
     const updatedStocks = await Promise.all(
       holdings.stocks.map(async (stock) => {
         try {
@@ -97,10 +94,8 @@ export const removeStockFromHoldings = async (req, res) => {
     const holdings = await Holdings.findOne({ userId });
     if (!holdings) return res.status(404).json({ message: 'Holdings not found' });
 
-    // Filter out the stock to remove
     holdings.stocks = holdings.stocks.filter((stock) => stock.name !== stockName);
 
-    // Recalculate total invested value and current total value
     let totalInvestedValue = 0;
     let totalValue = 0;
 
