@@ -23,7 +23,7 @@ export default function StockChart ({ stock }) {
       <h2 className="text-2xl font-semibold text-gray-700">{stock.companyName}</h2>
       <p className="text-gray-500">{stock.companyProfile.companyDescription}</p>
 
-      {/* Price and Profit */}
+
       <div className="flex items-center justify-between mt-4">
         <p className="text-xl text-blue-600 font-bold">NSE: ₹{stock.currentPrice.NSE}</p>
         <p className={`text-xl font-bold ${stock.percentChange > 0 ? 'text-green-500' : 'text-red-500'}`}>
@@ -31,12 +31,10 @@ export default function StockChart ({ stock }) {
         </p>
       </div>
 
-      {/* Chart */}
       <div className="mt-8">
         <Line data={chartData} options={{ responsive: true, maintainAspectRatio: false }} />
       </div>
 
-      {/* Financials */}
       <div className="mt-8">
         <h3 className="text-xl font-semibold text-gray-600">Key Financials</h3>
         <ul className="mt-4 space-y-2">

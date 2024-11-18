@@ -1,4 +1,4 @@
-// routes/holdings.js
+
 import express from 'express';
 import { addOrUpdateStock, getUserHoldings, removeStockFromHoldings } from '../controllers/holdings.controller.js';
 import { verifyToken } from '../Utils/verifyUser.js'

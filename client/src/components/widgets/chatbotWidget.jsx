@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Chatbot from '../../pages/Chatbot'; // Import your Chatbot component
+import Chatbot from '../../pages/Chatbot';
 import Draggable from 'react-draggable';
 export default function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false);

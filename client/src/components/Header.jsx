@@ -32,12 +32,11 @@ export default function Header() {
             </h1>
           </Link>
 
-          {/* Mobile Menu Button */}
           <button onClick={toggleMenu} className={`ml-60 sm:hidden ${isOpen ? 'transform rotate-180' : ''}`}>
             <FontAwesomeIcon icon={faBars} className="rounded-full" />
           </button>
 
-          {/* Navigation Links */}
+
           <ul className={`absolute sm:relative bg-black sm:bg-transparent transform ${isOpen ? 'translate-y-0' : '-translate-y-full'} transition-transform duration-300 ease-in-out top-full left-0 w-full sm:w-auto flex-col sm:flex-row gap-4 list-none px-4 sm:px-0 z-20 sm:flex ${!isOpen && 'hidden'}`}>
             {['/expense-tracker', '/chatbot', '/stocks','/holdings','/contact-us',].map((path, index) => (
               <Link key={index} to={path} className='no-underline'>
@@ -48,7 +47,7 @@ export default function Header() {
             ))}
           </ul>
         </div>
-        {/* User Actions */}
+      
         <ul className='flex gap-4'>
           <Link to={currentUser ? 'profile' : 'signin'}>
             {currentUser ? (
