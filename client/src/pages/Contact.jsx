@@ -1,46 +1,98 @@
-import React from 'react'
+import React, { useState } from 'react';
+import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
-export default function Contact() {
+export default function ContactUs() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async () => {
+    const { name, email, message } = formData;
+
+    if (!name || !email || !message) {
+      toast.error('All fields are required.');
+      return;
+    }
+
+    try {
+      const response = await axios.post('/api/contact', formData);
+      if (response.status === 200) {
+        toast.success('Message sent successfully!');
+        setFormData({ name: '', email: '', message: '' });
+      }
+    } catch (error) {
+      toast.error('Failed to send the message. Please try again.');
+      console.error('Error:', error);
+    }
+  };
+
   return (
-    <div className="">
-                <div id="Contact font-heading" className="mx-auto flex flex-col  justify-center items-center">
+    <div className="ml-20 mr-20 mt-20" data-aos="fade-down">
+      <h className="text-white font-bold text-5xl tracking-tight mb-20">
+        Contact Us
+      </h>
+      <p className="text-white text-md mt-8">
+        We would love to hear from you. Please fill in the details below.
+      </p>
 
-                            <h1 className="text-3xl font-bold leading-tight text-white text-center">CONTACT US</h1>
-
-                    <form className="w-2/3 md:w-1/3 space-y-8  flex flex-col">
-                        <div>
-                            <input
-                                type="text"
-                                name="name"
-                                className=" border-b text-white border-gray-500 rounded-full p-3 placeholder-zinc-500 bg-transparent focus:outline-none w-full mt-12 xl:mt-36 py-3 transition-transform hover:border-b-2"
-                                placeholder="Name"
-                            />
-                        </div>
-                        <div>
-                            <input
-                                type="text"
-                                name="number"
-                                className="border-b text-white border-gray-500 rounded-full p-3 placeholder-zinc-500 bg-transparent focus:outline-none w-full py-3 transition-transform hover:border-b-2"
-                                placeholder="Number"
-                            />
-                        </div>
-                        <div>
-                            <textarea
-                                name="message"
-                                className="border-b text-white border-gray-500 p-3 rounded-lg placeholder-zinc-500 bg-transparent focus:outline-none w-full py-3 transition-transform hover:border-b-2"
-                                rows="4"
-                                placeholder="Message"
-                            ></textarea>
-                        </div>
-                        <button
-                            type="submit"
-                            className=" rounded-full  bg-black  text-amber-50 mx-auto mt-4 p-3 w-48"
-                        >
-                            Submit
-                        </button>
-                    </form>
-
-                </div>
+      <div className="container mx-auto px-4 mt-20">
+        <form className="flex flex-col gap-10 p-6">
+          <div className="grid grid-cols-2 gap-6">
+            <div className="flex flex-col gap-2" data-aos="fade-right">
+              <label htmlFor="name" className="text-white text-md">Name</label>
+              <input
+                type="text"
+                className="border p-4 bg-[#010D50] border-transparent shadow-md rounded-full text-white"
+                id="name"
+                value={formData.name}
+                onChange={handleChange}
+              />
             </div>
-  )
+
+            <div className="flex flex-col gap-2" data-aos="fade-left">
+              <label htmlFor="email" className="text-white text-md">Email</label>
+              <input
+                type="email"
+                className="border p-4 bg-[#010D50] shadow-md border-transparent rounded-full text-white"
+                id="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2" data-aos="fade-right">
+            <label htmlFor="message" className="text-white text-md">Message</label>
+            <textarea
+              className="border p-4 bg-[#010D50] border-transparent shadow-md rounded-lg text-white"
+              id="message"
+              rows="5"
+              value={formData.message}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="flex justify-center mt-10">
+            <button
+              type="button"
+              onClick={handleSubmit}
+              className="bg-red-800 text-white p-3 rounded-full border-transparent hover:bg-gray-700 text-xs uppercase"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 }

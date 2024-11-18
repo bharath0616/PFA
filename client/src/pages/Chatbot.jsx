@@ -67,7 +67,7 @@ const Chatbot = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center max-w-xl mx-auto bg-gray-900 bg-opacity-70 backdrop-blur-lg rounded-xl p-6 shadow-2xl mt-10">
+        <div className="flex flex-col items-center justify-center max-w-xl mx-auto bg-gray-900 bg-opacity-70 backdrop-blur-lg rounded-xl p-6 shadow-2xl mt-4">
             <h2 className="text-2xl font-semibold mb-6 text-gray-100">Chatbot</h2>
 
             <button

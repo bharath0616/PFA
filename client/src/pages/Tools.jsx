@@ -64,6 +64,20 @@ export default function Tools() {
         </Link>
         </div>
 </div>
+<div className='w-1/2 p-4' data-aos="fade-down-left">
+        <Link to='/salaryCalculator' className='flex bg-[#010D50] p-6 no-underline 
+        rounded-3xl justify-center gap-4'>
+            <div>
+            <img src={sip} className='rounded-lg'/>
+            </div>
+            <div className='flex flex-col justify-center '>
+              <h className='text-white font-heading font-semibold text-sm'>SALARY CALCULATOR</h>
+              <p className='text-white font-heading font-light text-sm '>
+              Plan your future with our SALARY calculator. Estimate returns and achieve your financial goals through Systematic Investment Plans.
+              </p>
+            </div>
+        </Link>
+        </div>
 
     
 </div>

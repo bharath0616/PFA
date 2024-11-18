@@ -65,11 +65,12 @@ export const fetchHoldings = (userId) => async (dispatch) => {
   }
 };
 
-export const addOrUpdateStock = (userId, stockName, quantity) => async (dispatch) => {
+export const addOrUpdateStock = (payload) => async (dispatch) => {
   dispatch(updateHoldingsStart());
   try {
-    await axios.post("/api/holdings/addOrUpdate", { userId, stockName, quantity });
-    const response = await axios.get(`/api/holdings/${userId}`);
+    await axios.post("/api/holdings/addOrUpdate",payload);
+    
+    const response = await axios.get(`/api/holdings/${payload.userId}`);
     dispatch(updateHoldingsSuccess(response.data));
   } catch (error) {
     dispatch(updateHoldingsFailure(error.message));

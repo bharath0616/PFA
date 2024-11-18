@@ -7,7 +7,10 @@ import 'slick-carousel/slick/slick-theme.css';
 import SearchStockCard from '../components/stockApi/SearchStockCard';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchHoldings } from '../redux/holdings/holdingsSlice';
-
+import toast, { Toaster } from 'react-hot-toast';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import Loader from 'react-loaders';
 export default function Stocks() {
   const [trendingStocks, setTrendingStocks] = useState({ top_gainers: [], top_losers: [] });
   const [nseStocks, setNseStocks] = useState([]);
@@ -16,10 +19,12 @@ export default function Stocks() {
   const [searchTerm, setSearchTerm] = useState('');
 
   const userId = useSelector((state) => state.user.currentUser?._id) || localStorage.getItem("userId");
-
- 
   const holdings = useSelector((state) => state.holdings.holdings);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
 
   useEffect(() => {
     if (userId) {
@@ -32,8 +37,10 @@ export default function Stocks() {
       try {
         const response = await axios.get('/api/stocks/trending');
         setTrendingStocks(response.data.trending_stocks);
+        toast.success("Trending stocks loaded successfully!");
       } catch (error) {
         console.error("Error fetching trending stocks:", error);
+        toast.error("Failed to load trending stocks.");
       }
     };
 
@@ -41,8 +48,10 @@ export default function Stocks() {
       try {
         const response = await axios.get('/api/stocks/nse');
         setNseStocks(response.data);
+        toast.success("NSE stocks loaded successfully!");
       } catch (error) {
         console.error("Error fetching NSE stocks:", error);
+        toast.error("Failed to load NSE stocks.");
       }
     };
 
@@ -50,8 +59,10 @@ export default function Stocks() {
       try {
         const response = await axios.get('/api/stocks/bse');
         setBseStocks(response.data);
+        toast.success("BSE stocks loaded successfully!");
       } catch (error) {
         console.error("Error fetching BSE stocks:", error);
+        toast.error("Failed to load BSE stocks.");
       }
     };
 
@@ -66,11 +77,14 @@ export default function Stocks() {
       try {
         const response = await axios.get(`/api/stocks/search?name=${searchTerm}`);
         setSearchedStocks(Array.isArray(response.data) ? response.data : [response.data]);
+        toast.success("Search results loaded!");
       } catch (error) {
         console.error("Error searching for stock:", error);
+        toast.error("Failed to load search results.");
       }
     } else {
       setSearchedStocks([]);
+      toast("Please enter a search term.");
     }
   };
 
@@ -88,11 +102,13 @@ export default function Stocks() {
   };
 
   return (
-    <div className="min-h-screen bg-[#010D50] p-8">
+    <>
+    <div className="min-h-screen p-8">
+     
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold text-center text-white mb-10">Stock Dashboard</h1>
-        
-        <form onSubmit={handleSearch} className="flex items-center space-x-4 mb-8">
+        <h1 className="text-4xl font-bold text-center text-white mb-10" data-aos="fade-up">Stock Dashboard</h1>
+
+        <form onSubmit={handleSearch} className="flex items-center space-x-4 mb-8" >
           <input
             type="text"
             value={searchTerm}
@@ -116,7 +132,7 @@ export default function Stocks() {
           </div>
         )}
 
-        <div className="mb-8">
+        <div className="mb-8" >
           <h2 className="text-2xl font-bold text-white mb-4">Top NSE Stocks</h2>
           <Slider {...sliderSettings}>
             {nseStocks.map((stock) => (
@@ -125,7 +141,7 @@ export default function Stocks() {
           </Slider>
         </div>
 
-        <div className="mb-8">
+        <div className="mb-8" >
           <h2 className="text-2xl font-bold text-white mb-4">Top BSE Stocks</h2>
           <Slider {...sliderSettings}>
             {bseStocks.map((stock) => (
@@ -134,8 +150,8 @@ export default function Stocks() {
           </Slider>
         </div>
 
-        <h2 className="text-2xl font-bold text-white mb-4">Trending Stocks</h2>
-        <div className="mb-6">
+        <h2 className="text-2xl font-bold text-white mb-4" data-aos="fade-up">Trending Stocks</h2>
+        <div className="mb-6" >
           <h3 className="text-xl font-semibold text-green-400 mb-4">Top Gainers</h3>
           <Slider {...sliderSettings}>
             {trendingStocks.top_gainers.map((stock) => (
@@ -144,7 +160,7 @@ export default function Stocks() {
           </Slider>
         </div>
 
-        <div className="mb-6">
+        <div className="mb-6" >
           <h3 className="text-xl font-semibold text-red-400 mb-4">Top Losers</h3>
           <Slider {...sliderSettings}>
             {trendingStocks.top_losers.map((stock) => (
@@ -154,5 +170,7 @@ export default function Stocks() {
         </div>
       </div>
     </div>
+    <Loader type="pacman" />
+    </>
   );
 }
