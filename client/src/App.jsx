@@ -31,6 +31,7 @@ import Stocks from './pages/Stocks.jsx';
 import Portfolio from './pages/Portfolio.jsx';
 import SalaryCalculator from './pages/SalaryCalculator.jsx';
 import ChatbotWidget from './components/widgets/chatbotWidget.jsx';
+import EmiCalculator from './pages/EmiCalculator.jsx';
 
 
   export default function App() {
@@ -55,6 +56,7 @@ import ChatbotWidget from './components/widgets/chatbotWidget.jsx';
         <Route path='/sipCalculator' element={<SipCalculator />} />
         <Route path='/taxCalculator' element={<TaxCalculator />} />
         <Route path='/salaryCalculator' element={<SalaryCalculator />} />
+        <Route path='/emiCalculator' element={<EmiCalculator/>} />
         <Route path='/portfolioManager' element={<PortfolioManager />} />
         <Route path='/holdings' element={<Portfolio />} />
         <Route path='/stocks' element={<Stocks />} />

@@ -7,7 +7,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 export default function Footer() {
   return (
-    <div className='mt-32 bg-[#010D50] p-10'>
+    <div className='mt-32 bg-[#010D50] p-10 w-full'>
       <div className='flex flex-col md:flex-row justify-between items-center mx-4 md:mx-20 mb-10'>
         <Link to="/" className='no-underline text-xl font-bold font-heading text-white'>
           Finance Fix
@@ -39,7 +39,7 @@ export default function Footer() {
             <p className='text-white font-heading font-light text-xs'>CONTACT US</p>
           </div>
         </div>
-        <div className='flex flex-col gap-3 items-start mt-4 md:mt-0'>
+        {/* <div className='flex flex-col gap-3 items-start mt-4 md:mt-0'>
           <div className='flex items-center gap-3'>
             <img src={newsletter} alt="Subscribe to Newsletter" className="w-24 md:w-36 lg:w-48 rounded-xl" />
             <h2 className='text-white font-heading text-lg md:text-xl lg:text-3xl font-bold'>Subscribe to our finance <br/>news weekly newsletter!</h2>
@@ -57,7 +57,7 @@ export default function Footer() {
               Subscribe
             </Link>
           </div>
-        </div>
+        </div> */}
       </div>
       <p className='text-white font-heading mt-10 text-center font-light text-xs'>Ⓒ BHP- All rights reserved</p>
     </div>

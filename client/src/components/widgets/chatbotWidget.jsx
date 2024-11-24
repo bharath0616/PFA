@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Chatbot from '../../pages/Chatbot';
 import Draggable from 'react-draggable';
+import chatbot from '../../assets/chatbot.png'
 export default function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -29,7 +30,7 @@ export default function ChatbotWidget() {
           title="Chat with us"
         >
           <img
-            src="https://cdn-icons-png.flaticon.com/512/2331/2331941.png"
+            src={chatbot}
             alt="Chatbot Icon"
             className="w-10 h-10"
           />

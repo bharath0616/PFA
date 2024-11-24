@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import toast, { Toaster } from 'react-hot-toast';
+import React, { useState, useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function SalaryCalculator() {
   const [formData, setFormData] = useState({
@@ -28,12 +28,25 @@ export default function SalaryCalculator() {
   };
 
   const calculateSalary = () => {
-    const { ctc, bonusPercentage, monthlyProfessionalTax, monthlyEmployerPF, monthlyEmployeePF, monthlyAdditionalDeduction1, monthlyAdditionalDeduction2 } = formData;
+    const {
+      ctc,
+      bonusPercentage,
+      monthlyProfessionalTax,
+      monthlyEmployerPF,
+      monthlyEmployeePF,
+      monthlyAdditionalDeduction1,
+      monthlyAdditionalDeduction2,
+    } = formData;
 
     const bonus = (bonusPercentage / 100) * ctc;
     const annualGrossSalary = ctc - bonus;
 
-    const monthlyDeductions = monthlyProfessionalTax + monthlyEmployerPF + monthlyEmployeePF + monthlyAdditionalDeduction1 + monthlyAdditionalDeduction2;
+    const monthlyDeductions =
+      monthlyProfessionalTax +
+      monthlyEmployerPF +
+      monthlyEmployeePF +
+      monthlyAdditionalDeduction1 +
+      monthlyAdditionalDeduction2;
     const annualDeductions = monthlyDeductions * 12;
 
     const monthlyTakeHome = (annualGrossSalary / 12) - monthlyDeductions;
@@ -56,14 +69,16 @@ export default function SalaryCalculator() {
         Salary Calculator
       </h>
       <p className="text-white text-md mt-8">
-        Enter the details to calculate your take-home salary, monthly and annual deductions.
+        Enter the details to calculate your take-home salary, monthly, and annual deductions.
       </p>
 
       <div className="container mx-auto px-4 mt-20">
         <form className="flex flex-col gap-10 p-6">
           <div className="grid grid-cols-2 gap-6">
             <div className="flex flex-col gap-2" data-aos="fade-right">
-              <label htmlFor="ctc" className="text-white text-md">Cost to Company (CTC)</label>
+              <label htmlFor="ctc" className="text-white text-md">
+                Cost to Company (CTC)
+              </label>
               <input
                 type="number"
                 className="border p-4 bg-[#010D50] border-transparent shadow-md rounded-full text-white"
@@ -74,7 +89,9 @@ export default function SalaryCalculator() {
             </div>
 
             <div className="flex flex-col gap-2" data-aos="fade-left">
-              <label htmlFor="bonusPercentage" className="text-white text-md">Bonus Included in CTC (%)</label>
+              <label htmlFor="bonusPercentage" className="text-white text-md">
+                Bonus Included in CTC (%)
+              </label>
               <input
                 type="number"
                 className="border p-4 bg-[#010D50] shadow-md border-transparent rounded-full text-white"
@@ -87,7 +104,12 @@ export default function SalaryCalculator() {
 
           <div className="grid grid-cols-2 gap-6 mt-10">
             <div className="flex flex-col gap-2" data-aos="fade-right">
-              <label htmlFor="monthlyProfessionalTax" className="text-white text-md">Monthly Professional Tax</label>
+              <label
+                htmlFor="monthlyProfessionalTax"
+                className="text-white text-md"
+              >
+                Monthly Professional Tax
+              </label>
               <input
                 type="number"
                 className="border p-4 bg-[#010D50] border-transparent shadow-md rounded-full text-white"
@@ -98,7 +120,9 @@ export default function SalaryCalculator() {
             </div>
 
             <div className="flex flex-col gap-2" data-aos="fade-up">
-              <label htmlFor="monthlyEmployerPF" className="text-white text-md">Monthly Employer PF</label>
+              <label htmlFor="monthlyEmployerPF" className="text-white text-md">
+                Monthly Employer PF
+              </label>
               <input
                 type="number"
                 className="border p-4 bg-[#010D50] border-transparent shadow-md rounded-full text-white"
@@ -109,7 +133,9 @@ export default function SalaryCalculator() {
             </div>
 
             <div className="flex flex-col gap-2" data-aos="fade-left">
-              <label htmlFor="monthlyEmployeePF" className="text-white text-md">Monthly Employee PF</label>
+              <label htmlFor="monthlyEmployeePF" className="text-white text-md">
+                Monthly Employee PF
+              </label>
               <input
                 type="number"
                 className="border p-4 bg-[#010D50] border-transparent shadow-md rounded-full text-white"
@@ -120,7 +146,12 @@ export default function SalaryCalculator() {
             </div>
 
             <div className="flex flex-col gap-2" data-aos="fade-up">
-              <label htmlFor="monthlyAdditionalDeduction1" className="text-white text-md">Monthly Additional Deduction (Optional)</label>
+              <label
+                htmlFor="monthlyAdditionalDeduction1"
+                className="text-white text-md"
+              >
+                Monthly Additional Deduction (Optional)
+              </label>
               <input
                 type="number"
                 className="border p-4 bg-[#010D50] border-transparent shadow-md rounded-full text-white"
@@ -131,7 +162,12 @@ export default function SalaryCalculator() {
             </div>
 
             <div className="flex flex-col gap-2" data-aos="fade-up">
-              <label htmlFor="monthlyAdditionalDeduction2" className="text-white text-md">Monthly Additional Deduction (Optional)</label>
+              <label
+                htmlFor="monthlyAdditionalDeduction2"
+                className="text-white text-md"
+              >
+                Monthly Additional Deduction (Optional)
+              </label>
               <input
                 type="number"
                 className="border p-4 bg-[#010D50] border-transparent shadow-md rounded-full text-white"
@@ -166,6 +202,20 @@ export default function SalaryCalculator() {
           </div>
         </div>
       )}
+
+      {/* Salary Components Explanation */}
+      <div className="mt-20 text-white">
+        <h3 className="text-2xl font-bold mb-4">What are the Components of the Salary Structure?</h3>
+        <ul className="list-disc list-inside text-lg">
+          <li><strong>Basic Salary:</strong> Fixed component, 40-50% of the CTC.</li>
+          <li><strong>HRA:</strong> Housing Rent Allowance, partially exempt from tax if in a rented house.</li>
+          <li><strong>LTA:</strong> Leave Travel Allowance for travel expenses.</li>
+          <li><strong>Professional Tax:</strong> State-imposed tax, maximum Rs 2,500 annually.</li>
+          <li><strong>Special Allowance:</strong> Taxable component for various purposes.</li>
+          <li><strong>Bonus:</strong> Performance-linked incentive, fully taxable.</li>
+          <li><strong>EPF:</strong> Provident Fund contributions by employer and employee, deductible under Section 80C.</li>
+        </ul>
+      </div>
     </div>
   );
 }
