@@ -5,7 +5,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 export default function Portfolio() {
   const userId = useSelector((state) => state.user.currentUser?._id) || localStorage.getItem("userId");
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); //REDUX
   const { holdings, totalValue = 0, investedValue = 0, loading, error } = useSelector((state) => state.holdings);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
