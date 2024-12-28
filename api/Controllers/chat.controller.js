@@ -1,8 +1,11 @@
 import Chat from '../models/chat.model.js';
 import {GoogleGenerativeAI} from '@google/generative-ai';
-const apiKey = "AIzaSyAGmZWM5unrPHLkXaRbu3QiEaOWEb3Eb68";
-const genAI = new GoogleGenerativeAI(apiKey);
 
+import dotenv from 'dotenv';
+
+dotenv.config();
+const apiKey = process.env.GEMINI_API_KEY;
+const genAI = new GoogleGenerativeAI(apiKey);
 const model = genAI.getGenerativeModel({model: 'gemini-1.5-pro'});
 
 const generationConfig = {
