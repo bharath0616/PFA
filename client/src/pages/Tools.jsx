@@ -95,6 +95,37 @@ export default function Tools() {
         </Link>
         </div>
         </div>
+<div className='flex justify-around gap-8 '>
+<div className='w-1/2 p-4' data-aos="fade-down-left">
+        <Link to='/summary' className='flex bg-[#010D50] p-6 no-underline 
+        rounded-3xl justify-center gap-4'>
+            <div>
+            <img src={sip} className='rounded-lg'/>
+            </div>
+            <div className='flex flex-col justify-center '>
+              <h className='text-white font-heading font-semibold text-sm'>Summarizer</h>
+              <p className='text-white font-heading font-light text-sm '>
+              Plan your finances with our Salary Calculator. Calculate your take-home pay and deductions to manage your budget effectively.
+              </p>
+            </div>
+        </Link>
+        </div>
+
+        <div className='w-1/2 p-4' data-aos="fade-down-left">
+        <Link to='/emiCalculator' className='flex bg-[#010D50] p-6 no-underline 
+        rounded-3xl justify-center gap-4'>
+            <div>
+            <img src={sip} className='rounded-lg'/>
+            </div>
+            <div className='flex flex-col justify-center '>
+              <h className='text-white font-heading font-semibold text-sm'>Gold prediction</h>
+              <p className='text-white font-heading font-light text-sm '>
+              Simplify your loan planning with our EMI Calculator. Calculate monthly installments and repayment details effortlessly for informed financial decisions.
+              </p>
+            </div>
+        </Link>
+        </div>
+        </div>
 </div>
       </div>
 

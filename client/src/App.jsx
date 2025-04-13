@@ -32,6 +32,8 @@ import Portfolio from './pages/Portfolio.jsx';
 import SalaryCalculator from './pages/SalaryCalculator.jsx';
 import ChatbotWidget from './components/widgets/chatbotWidget.jsx';
 import EmiCalculator from './pages/EmiCalculator.jsx';
+import Summary from './pages/Summary.jsx';
+import Predictor from './pages/Predictor.jsx';
 
 
   export default function App() {
@@ -53,6 +55,8 @@ import EmiCalculator from './pages/EmiCalculator.jsx';
         <Route path='/recommendations-hr' element={<RecHR />} />
         <Route path='/recommendations-mr' element={<RecMR />} />
         <Route path='/salarBreakdown' element={<SalaryBreakdown />} />
+        <Route path='/summary' element={<Summary />} />
+        <Route path='/predictor' element={<Predictor />} />
         <Route path='/sipCalculator' element={<SipCalculator />} />
         <Route path='/taxCalculator' element={<TaxCalculator />} />
         <Route path='/salaryCalculator' element={<SalaryCalculator />} />
